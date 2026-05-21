@@ -1,0 +1,80 @@
+version: "3.9"
+
+services:
+
+  # ── Base relationnelle : PostgreSQL + PostGIS ────────────────────────
+  postgres:
+    image: postgis/postgis:15-3.3
+    container_name: ude_postgres
+    environment:
+      POSTGRES_DB:       urban_data_explorer
+      POSTGRES_USER:     ude_user
+      POSTGRES_PASSWORD: ude_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ude_user -d urban_data_explorer"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ── Base NoSQL : MongoDB ─────────────────────────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: ude_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ude_user
+      MONGO_INITDB_ROOT_PASSWORD: ude_password
+      MONGO_INITDB_DATABASE:      urban_data_explorer
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./database/mongo/init.js:/docker-entrypoint-initdb.d/init.js
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ── API FastAPI ──────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: ude_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data:ro
+    environment:
+      - API_KEY=urban-explorer-dev-key
+      - POSTGRES_URL=postgresql://ude_user:ude_password@postgres:5432/urban_data_explorer
+      - MONGODB_URL=mongodb://ude_user:ude_password@mongodb:27017/urban_data_explorer?authSource=admin
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── Dashboard statique ────────────────────────────────────────────────
+  dashboard:
+    image: nginx:alpine
+    container_name: ude_dashboard
+    ports:
+      - "3000:80"
+    volumes:
+      - ./dashboard:/usr/share/nginx/html:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  mongodb_data:

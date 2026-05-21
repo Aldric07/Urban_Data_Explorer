@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Urban Data Explorer — Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-brand">
+    <div class="brand-logo">UD</div>
+    <div class="brand-text">
+      <span class="brand-title">Urban Data Explorer</span>
+      <span class="brand-sub">Paris · Marché Immobilier</span>
+    </div>
+  </div>
+
+  <nav class="header-nav">
+    <button class="nav-btn active" data-tab="carte">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM4.318 6.318a6.5 6.5 0 000 7.364L7.5 10.5l2 2 3.5-5 2 2 1.182-1.182A6.5 6.5 0 004.318 6.318z"/></svg>
+      Carte
+    </button>
+    <button class="nav-btn" data-tab="evolution">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+      Évolution
+    </button>
+    <button class="nav-btn" data-tab="comparaison">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zm-4.707 9.293a1 1 0 010-1.414L4.586 11H11a1 1 0 100-2H3a1 1 0 000 2h1.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L7 14.586V13z"/></svg>
+      Comparaison
+    </button>
+    <button class="nav-btn" data-tab="indicateurs">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"/></svg>
+      Indicateurs
+    </button>
+  </nav>
+
+  <div class="header-status">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Connexion…</span>
+  </div>
+</header>
+
+<!-- ── MAIN ───────────────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Filtres -->
+    <div class="sidebar-section">
+      <div class="section-label">Filtres</div>
+
+      <div class="field">
+        <label class="field-label">Arrondissement</label>
+        <select id="select-arr" class="select">
+          <option value="all">Tous Paris</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label">
+          Année
+          <span class="field-value" id="label-annee">2023</span>
+        </label>
+        <div class="slider-wrap">
+          <input type="range" id="slider-annee" min="2021" max="2024" value="2023" step="1" class="slider"/>
+          <div class="slider-labels">
+            <span>2021</span><span>2022</span><span>2023</span><span>2024</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Indicateur carte</label>
+        <select id="select-indicateur" class="select">
+          <option value="prix_m2_median">Prix/m² médian</option>
+          <option value="part_logements_sociaux_pct">Logements sociaux (%)</option>
+          <option value="score_accessibilite">Accessibilité urbaine</option>
+          <option value="score_qualite_vie">Qualité de vie</option>
+          <option value="score_securite">Sécurité</option>
+          <option value="score_accessibilite_immo">Accessibilité immo.</option>
+          <option value="score_global">Score global</option>
+        </select>
+      </div>
+
+      <button id="btn-play" class="btn-play">
+        <svg id="play-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"/></svg>
+        <svg id="stop-icon" viewBox="0 0 20 20" fill="currentColor" style="display:none"><path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 0014.25 3h-1.5z"/></svg>
+        Lecture timeline
+      </button>
+    </div>
+
+    <!-- KPIs -->
+    <div class="sidebar-section">
+      <div class="section-label" id="kpi-titre">Paris — 2023</div>
+      <div class="kpi-grid">
+        <div class="kpi-card accent">
+          <div class="kpi-val" id="kpi-prix">—</div>
+          <div class="kpi-lbl">Prix/m² médian</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val" id="kpi-variation">—</div>
+          <div class="kpi-lbl">Variation annuelle</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val" id="kpi-ls">—</div>
+          <div class="kpi-lbl">Log. sociaux</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val" id="kpi-transactions">—</div>
+          <div class="kpi-lbl">Transactions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Légende -->
+    <div class="sidebar-section" id="section-legende">
+      <div class="section-label">Légende</div>
+      <div id="legende-container" class="legende"></div>
+    </div>
+
+  </aside>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div class="content">
+
+    <!-- TAB : Carte -->
+    <div class="tab-panel active" id="tab-carte">
+      <div id="map"></div>
+      <div class="map-tooltip" id="tooltip"></div>
+
+      <!-- Panneau détail arrondissement (clic) -->
+      <div class="detail-panel" id="detail-panel">
+        <button class="detail-close" id="detail-close">✕</button>
+        <div class="detail-header">
+          <div class="detail-num" id="detail-num">—</div>
+          <div class="detail-name" id="detail-name">Arrondissement</div>
+        </div>
+        <div class="detail-body" id="detail-body"></div>
+      </div>
+    </div>
+
+    <!-- TAB : Évolution -->
+    <div class="tab-panel" id="tab-evolution">
+      <div class="charts-grid">
+        <div class="chart-card full">
+          <div class="chart-header">
+            <h3>Évolution du prix/m² médian</h3>
+            <div class="chart-filters">
+              <select id="evo-arr-filter" class="select-sm">
+                <option value="all">Top 5 arrondissements</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-body"><canvas id="chart-evolution"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><h3>Volume de transactions</h3></div>
+          <div class="chart-body"><canvas id="chart-volume"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><h3>Distribution des prix 2024</h3></div>
+          <div class="chart-body"><canvas id="chart-distribution"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB : Comparaison -->
+    <div class="tab-panel" id="tab-comparaison">
+      <div class="compare-header">
+        <h2>Comparer deux arrondissements</h2>
+        <div class="compare-selectors">
+          <select id="compare-arr1" class="select"></select>
+          <div class="vs-badge">VS</div>
+          <select id="compare-arr2" class="select"></select>
+          <button id="btn-compare" class="btn-primary">Comparer</button>
+        </div>
+      </div>
+      <div id="compare-result"></div>
+    </div>
+
+    <!-- TAB : Indicateurs -->
+    <div class="tab-panel" id="tab-indicateurs">
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header"><h3>Profil — Top 5 arrondissements</h3></div>
+          <div class="chart-body"><canvas id="chart-radar"></canvas></div>
+        </div>
+        <div class="chart-card full">
+          <div class="chart-header">
+            <h3>Classement score global</h3>
+            <div class="rank-legend">
+              <span class="rank-top">■ Top 3</span>
+              <span class="rank-mid">■ Médian</span>
+              <span class="rank-bot">■ Bottom 3</span>
+            </div>
+          </div>
+          <div class="chart-body"><canvas id="chart-ranking"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/map.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

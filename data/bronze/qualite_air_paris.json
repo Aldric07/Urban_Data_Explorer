@@ -1,0 +1,105 @@
+{
+  "source": "AIRPARIF estimations 2023 (données statiques de repli)",
+  "arrondissements": {
+    "1": {
+      "iqa_moyen": 68,
+      "no2_µg_m3": 28,
+      "pm25_µg_m3": 11
+    },
+    "2": {
+      "iqa_moyen": 70,
+      "no2_µg_m3": 30,
+      "pm25_µg_m3": 12
+    },
+    "3": {
+      "iqa_moyen": 65,
+      "no2_µg_m3": 26,
+      "pm25_µg_m3": 10
+    },
+    "4": {
+      "iqa_moyen": 67,
+      "no2_µg_m3": 28,
+      "pm25_µg_m3": 11
+    },
+    "5": {
+      "iqa_moyen": 63,
+      "no2_µg_m3": 25,
+      "pm25_µg_m3": 10
+    },
+    "6": {
+      "iqa_moyen": 62,
+      "no2_µg_m3": 24,
+      "pm25_µg_m3": 10
+    },
+    "7": {
+      "iqa_moyen": 58,
+      "no2_µg_m3": 22,
+      "pm25_µg_m3": 9
+    },
+    "8": {
+      "iqa_moyen": 75,
+      "no2_µg_m3": 34,
+      "pm25_µg_m3": 13
+    },
+    "9": {
+      "iqa_moyen": 72,
+      "no2_µg_m3": 31,
+      "pm25_µg_m3": 12
+    },
+    "10": {
+      "iqa_moyen": 71,
+      "no2_µg_m3": 30,
+      "pm25_µg_m3": 12
+    },
+    "11": {
+      "iqa_moyen": 69,
+      "no2_µg_m3": 29,
+      "pm25_µg_m3": 11
+    },
+    "12": {
+      "iqa_moyen": 60,
+      "no2_µg_m3": 23,
+      "pm25_µg_m3": 9
+    },
+    "13": {
+      "iqa_moyen": 61,
+      "no2_µg_m3": 24,
+      "pm25_µg_m3": 10
+    },
+    "14": {
+      "iqa_moyen": 59,
+      "no2_µg_m3": 22,
+      "pm25_µg_m3": 9
+    },
+    "15": {
+      "iqa_moyen": 62,
+      "no2_µg_m3": 25,
+      "pm25_µg_m3": 10
+    },
+    "16": {
+      "iqa_moyen": 52,
+      "no2_µg_m3": 19,
+      "pm25_µg_m3": 8
+    },
+    "17": {
+      "iqa_moyen": 64,
+      "no2_µg_m3": 26,
+      "pm25_µg_m3": 10
+    },
+    "18": {
+      "iqa_moyen": 66,
+      "no2_µg_m3": 27,
+      "pm25_µg_m3": 11
+    },
+    "19": {
+      "iqa_moyen": 60,
+      "no2_µg_m3": 23,
+      "pm25_µg_m3": 9
+    },
+    "20": {
+      "iqa_moyen": 63,
+      "no2_µg_m3": 25,
+      "pm25_µg_m3": 10
+    }
+  }
+}

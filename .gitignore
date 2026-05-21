@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Data (Bronze — fichiers lourds via Git LFS ou exclus)
+data/bronze/dvf/*.csv.gz
+data/bronze/revenus_insee_raw.zip
+
+# Données légères Bronze conservées dans git
+# (GeoJSON, petits JSON/CSV)
+!data/bronze/geo_arrondissements.geojson
+!data/bronze/qualite_air_paris.json
+
+# Silver et Gold : générés, ne pas versionner
+data/silver/
+data/gold/
+
+# Logs
+*.log
+logs/
+
+# Environnement
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Docker
+*.dockerignore
