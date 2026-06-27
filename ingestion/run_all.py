@@ -1,6 +1,6 @@
 """
 ingestion/run_all.py — Urban Data Explorer
-Lance les 13 scripts d'ingestion dans l'ordre.
+Lance les 14 scripts d'ingestion dans l'ordre.
 Usage : python ingestion/run_all.py
 """
 import sys, time
@@ -22,6 +22,7 @@ from ingestion.qualite_air         import run as run_air
 from ingestion.commerces_sante     import run as run_commerces
 from ingestion.bruit               import run as run_bruit
 from ingestion.circulation         import run as run_circulation
+from ingestion.securite_urbaine    import run as run_securite
 
 TASKS = [
     ("Contours géographiques",        run_geo),
@@ -37,12 +38,13 @@ TASKS = [
     ("Commerces et santé (OSM/SIRENE)", run_commerces),
     ("Bruit (BRUITPARIF)",            run_bruit),
     ("Circulation / trafic (Paris)",  run_circulation),
+    ("Sécurité urbaine (OSM/BSPP)",   run_securite),
 ]
 
 
 def main():
     logger.info("=" * 62)
-    logger.info("  URBAN DATA EXPLORER — Ingestion Bronze (13 sources)")
+    logger.info("  URBAN DATA EXPLORER — Ingestion Bronze (14 sources)")
     logger.info("=" * 62)
 
     results = {}

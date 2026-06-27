@@ -7,6 +7,8 @@ Bronze → Silver : Nettoyage et normalisation des données DVF.
 - Sauvegarde en Parquet partitionné par année
 Compétences validées : C2.3, C2.4
 """
+from __future__ import annotations
+
 import sys
 from pathlib import Path
 

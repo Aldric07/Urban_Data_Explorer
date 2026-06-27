@@ -3,6 +3,8 @@ ingestion/criminalite.py
 Télécharge les données de criminalité (SSMSI) pour Paris.
 Nouveau dataset : bases-statistiques-communale-departementale-et-regionale...
 """
+from __future__ import annotations
+
 import sys
 from pathlib import Path
 import requests

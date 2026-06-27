@@ -164,6 +164,49 @@ def process_parcs():
     logger.success(f"    ✓ {len(df)} espaces verts → {dest.name}")
 
 
+def process_securite_urbaine():
+    """Parse commissariats + casernes de pompiers Bronze → Silver."""
+    sources = {
+        "commissariats": BRONZE_DIR / "commissariats_paris.json",
+        "pompiers":      BRONZE_DIR / "pompiers_paris.json",
+    }
+    dest = SILVER_DIR / "securite_urbaine.parquet"
+
+    if not any(p.exists() for p in sources.values()):
+        logger.warning("  Sécurité urbaine Bronze absent")
+        return
+
+    logger.info("  Silver sécurité urbaine…")
+    rows = []
+
+    for kind, src in sources.items():
+        if not src.exists():
+            continue
+        raw = json.loads(src.read_text())
+        elements = raw.get("elements", [])
+        for e in elements:
+            center = e.get("center") or {}
+            tags   = e.get("tags") or {}
+            lat = center.get("lat") or e.get("lat")
+            lon = center.get("lon") or e.get("lon")
+            rows.append({
+                "type":           kind,
+                "nom":            tags.get("name", ""),
+                "lat":            lat,
+                "lon":            lon,
+                "arrondissement": None,
+            })
+
+    df = pd.DataFrame(rows) if rows else pd.DataFrame(
+        columns=["type", "nom", "lat", "lon", "arrondissement"]
+    )
+    df = df.dropna(subset=["lat", "lon"])
+    df = df[df["lat"].between(48.80, 48.92) & df["lon"].between(2.25, 2.42)]
+
+    df.to_parquet(dest, index=False)
+    logger.success(f"    ✓ {len(df)} établissements sécurité → {dest.name}")
+
+
 def process_criminalite():
     src  = BRONZE_DIR / "criminalite_paris.csv"
     dest = SILVER_DIR / "criminalite.parquet"
@@ -260,6 +303,7 @@ def run():
     process_education()
     process_parcs()
     process_criminalite()
+    process_securite_urbaine()
     logger.success("  ✓ Toutes les sources secondaires traitées")
     return True
 

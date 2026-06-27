@@ -75,6 +75,31 @@ const API = {
     return data[0] || null;
   },
 
+  /** Qualité de l'air temps réel (pas de cache — données streaming) */
+  async getAirQuality({ hours = 24, alertOnly = false } = {}) {
+    let url = `/stream/air-quality?hours=${hours}`;
+    if (alertOnly) url += "&alert_only=true";
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    try {
+      const r = await fetch(CONFIG.API_BASE + url, {
+        headers: this._headers(),
+        signal: controller.signal,
+      });
+      if (!r.ok) throw new Error(`Air quality API ${r.status}`);
+      return await r.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  },
+
+  /** Rapport du dernier batch DVF (pas de cache) */
+  async getBatchStatus() {
+    const r = await fetch(CONFIG.API_BASE + "/batch/status");
+    if (!r.ok) throw new Error(`Batch status API ${r.status}`);
+    return r.json();
+  },
+
   /** Invalidate cache (ex: après changement d'année) */
   clearCache() {
     this._cache = {};

@@ -1,270 +1,432 @@
-// dashboard/js/app.js — Orchestration principale v2
+// dashboard/js/app.js v2
 
 (async () => {
 
-  // ── Status API ─────────────────────────────────────────────────────
-  const dot  = document.getElementById("status-dot");
-  const txt  = document.getElementById("status-text");
+  // ── API status ──────────────────────────────────────────────────────────
+  const statusEl = document.getElementById("api-status");
   try {
     const h = await API.health();
     if (h?.status === "ok") {
-      dot.className = "status-dot ok";
-      const pg  = h.databases?.postgresql?.includes("connected") ? "PG ✓" : "PG —";
-      const mdb = h.databases?.mongodb?.includes("connected")    ? "MDB ✓" : "MDB —";
-      txt.textContent = `API connectée · ${pg} · ${mdb}`;
+      statusEl.innerHTML = `<span class="status-dot"></span>${h.gold_ready ? "API connectée" : "Données partielles"}`;
+      statusEl.className = "api-status " + (h.gold_ready ? "ok" : "");
     }
   } catch {
-    dot.className = "status-dot err";
-    txt.textContent = "API hors ligne";
+    statusEl.innerHTML = `<span class="status-dot"></span>Mode démo`;
+    statusEl.className = "api-status err";
   }
 
-  // ── Remplir les selects ────────────────────────────────────────────
-  function fillSelect(id, includeAll = false) {
+  // ── Theme toggle ─────────────────────────────────────────────────────────
+  const themeBtn = document.getElementById("theme-toggle");
+  function _applyTheme(light) {
+    document.body.classList.toggle("light-mode", light);
+    themeBtn.textContent = light ? "☀️" : "🌙";
+    themeBtn.title = light ? "Passer en mode sombre" : "Passer en mode clair";
+  }
+  _applyTheme(document.body.classList.contains("light-mode")); // sync icon with FOUC class
+  themeBtn.addEventListener("click", () => {
+    const goLight = !document.body.classList.contains("light-mode");
+    _applyTheme(goLight);
+    localStorage.setItem("theme", goLight ? "light" : "dark");
+    MapModule.setTheme(goLight);
+  });
+
+  // ── Selects arrondissements ─────────────────────────────────────────────
+  function fillArrSelect(id, includeAll = false) {
     const el = document.getElementById(id);
     if (!el) return;
-    if (includeAll) el.innerHTML = `<option value="all">Tous Paris</option>`;
+    if (includeAll) el.innerHTML = `<option value="all">Tous les arrondissements</option>`;
+    else el.innerHTML = "";
     CONFIG.ARRONDISSEMENTS.forEach(a => {
       el.innerHTML += `<option value="${a.value}">${a.label}</option>`;
     });
   }
-  fillSelect("select-arr", true);
-  fillSelect("compare-arr1");
-  fillSelect("compare-arr2");
-  fillSelect("evo-arr-filter", true);
-  const ca2 = document.getElementById("compare-arr2");
-  if (ca2) ca2.value = "2";
 
-  // ── Init carte ─────────────────────────────────────────────────────
+  fillArrSelect("select-arr", true);
+  fillArrSelect("compare-arr1");
+  fillArrSelect("compare-arr2");
+  document.getElementById("compare-arr2").value = "2";
+
+  // Filtrage dynamique : désactive dans chaque dropdown la valeur sélectionnée dans l'autre
+  function _syncCompareOptions() {
+    const sel1 = document.getElementById("compare-arr1");
+    const sel2 = document.getElementById("compare-arr2");
+    Array.from(sel2.options).forEach(o => { o.disabled = o.value === sel1.value; });
+    Array.from(sel1.options).forEach(o => { o.disabled = o.value === sel2.value; });
+  }
+  _syncCompareOptions();
+
+  document.getElementById("compare-arr1").addEventListener("change", () => {
+    const sel1 = document.getElementById("compare-arr1");
+    const sel2 = document.getElementById("compare-arr2");
+    // Si le second a la même valeur, passer au premier disponible
+    if (sel2.value === sel1.value) {
+      const next = Array.from(sel2.options).find(o => o.value !== sel1.value);
+      if (next) sel2.value = next.value;
+    }
+    _syncCompareOptions();
+    document.getElementById("compare-error").style.display = "none";
+  });
+
+  document.getElementById("compare-arr2").addEventListener("change", () => {
+    const sel1 = document.getElementById("compare-arr1");
+    const sel2 = document.getElementById("compare-arr2");
+    if (sel1.value === sel2.value) {
+      const next = Array.from(sel1.options).find(o => o.value !== sel2.value);
+      if (next) sel1.value = next.value;
+    }
+    _syncCompareOptions();
+    document.getElementById("compare-error").style.display = "none";
+  });
+
+  // ── Carte ────────────────────────────────────────────────────────────────
   MapModule.init();
 
-  // ── Tabs ───────────────────────────────────────────────────────────
-  const tabs   = document.querySelectorAll(".nav-btn");
+  // ── Sidebar toggle ───────────────────────────────────────────────────────
+  const sidebar      = document.getElementById("sidebar");
+  const sidebarBtn   = document.getElementById("sidebar-toggle");
+  const expandBtn    = document.getElementById("map-expand-btn");
+
+  function toggleSidebar(forceOpen) {
+    const shouldCollapse = forceOpen === true ? false
+                         : forceOpen === false ? true
+                         : !sidebar.classList.contains("collapsed");
+    sidebar.classList.toggle("collapsed", shouldCollapse);
+    if (expandBtn) expandBtn.style.display = shouldCollapse ? "flex" : "none";
+    if (sidebarBtn) {
+      sidebarBtn.querySelector("svg").style.transform = shouldCollapse ? "rotate(180deg)" : "";
+    }
+  }
+
+  sidebarBtn?.addEventListener("click", () => toggleSidebar());
+  expandBtn?.addEventListener("click", () => toggleSidebar(true));
+
+  // ── Tabs ─────────────────────────────────────────────────────────────────
+  const tabs   = document.querySelectorAll(".tab");
   const panels = document.querySelectorAll(".tab-panel");
-  const loaded = {};
+  let chartsLoaded = {};
 
   tabs.forEach(tab => {
     tab.addEventListener("click", async () => {
       tabs.forEach(t => t.classList.remove("active"));
       panels.forEach(p => p.classList.remove("active"));
       tab.classList.add("active");
-      const id = "tab-" + tab.dataset.tab;
-      document.getElementById(id)?.classList.add("active");
+      document.getElementById("tab-" + tab.dataset.tab).classList.add("active");
 
-      if (tab.dataset.tab === "evolution" && !loaded.evolution) {
-        loaded.evolution = true;
+      // Resync WebGL after the tab panel becomes visible
+      if (tab.dataset.tab === "carte") {
+        requestAnimationFrame(() => MapModule.resize());
+      }
+
+      if (tab.dataset.tab === "evolution" && !chartsLoaded.evolution) {
+        chartsLoaded.evolution = true;
         await Charts.buildEvolution();
         await Charts.buildVolume();
-        await Charts.buildDistribution();
       }
-      if (tab.dataset.tab === "indicateurs" && !loaded.indicateurs) {
-        loaded.indicateurs = true;
+      if (tab.dataset.tab === "indicateurs" && !chartsLoaded.indicateurs) {
+        chartsLoaded.indicateurs = true;
         await Charts.buildRadar();
         await Charts.buildRanking();
+      }
+      if (tab.dataset.tab === "comparaison" && !chartsLoaded.comparaison) {
+        chartsLoaded.comparaison = true;
+        const a1 = parseInt(document.getElementById("compare-arr1").value);
+        const a2 = parseInt(document.getElementById("compare-arr2").value);
+        await Charts.buildComparaison(a1, a2, parseInt(sliderAnnee.value));
       }
     });
   });
 
-  // ── Slider année ───────────────────────────────────────────────────
-  const slider = document.getElementById("slider-annee");
-  const lblAnn = document.getElementById("label-annee");
+  // ── Slider année ──────────────────────────────────────────────────────────
+  const sliderAnnee = document.getElementById("slider-annee");
+  const labelAnnee  = document.getElementById("label-annee");
 
-  slider.addEventListener("input", () => {
-    const annee = parseInt(slider.value);
-    lblAnn.textContent = annee;
+  sliderAnnee.addEventListener("input", () => {
+    const annee = parseInt(sliderAnnee.value);
+    labelAnnee.textContent = annee;
     MapModule.update(annee, document.getElementById("select-indicateur").value);
-    updateKPIs(annee);
+    updateKPIs(annee, currentArr());
   });
 
-  // ── Select arrondissement ──────────────────────────────────────────
-  document.getElementById("select-arr").addEventListener("change", async e => {
-    const arr = e.target.value;
-    const annee = parseInt(slider.value);
+  document.getElementById("select-arr").addEventListener("change", async () => {
+    const annee = parseInt(sliderAnnee.value);
     MapModule.update(annee, document.getElementById("select-indicateur").value);
-    await updateKPIs(annee, arr === "all" ? null : parseInt(arr));
+    await updateKPIs(annee, currentArr());
   });
 
-  // ── Select indicateur ──────────────────────────────────────────────
   document.getElementById("select-indicateur").addEventListener("change", e => {
-    const annee = parseInt(slider.value);
-    MapModule.update(annee, e.target.value);
+    MapModule.update(parseInt(sliderAnnee.value), e.target.value);
   });
 
-  // ── Filtre évolution ───────────────────────────────────────────────
-  document.getElementById("evo-arr-filter")?.addEventListener("change", e => {
-    Charts.buildEvolution(e.target.value);
-  });
+  function currentArr() {
+    const v = document.getElementById("select-arr").value;
+    return v === "all" ? null : parseInt(v);
+  }
 
-  // ── KPIs ───────────────────────────────────────────────────────────
+  // ── KPIs avec animation ───────────────────────────────────────────────────
+  function animateValue(el, to, fmt) {
+    const from = parseFloat(el.dataset.raw) || 0;
+    if (isNaN(from) || isNaN(to)) { el.textContent = fmt(to); return; }
+    const start = performance.now();
+    const dur   = 550;
+    (function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(from + (to - from) * ease);
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+    el.dataset.raw = to;
+  }
+
   async function updateKPIs(annee, arrondissement = null) {
+    const titre = document.getElementById("kpi-titre");
+    titre.textContent = arrondissement
+      ? `${arrondissement}${arrondissement === 1 ? "er" : "e"} arr. — ${annee}`
+      : `Paris — ${annee}`;
+
     try {
       const data = await API.getPrix({ arrondissement, anneeMin: annee, anneeMax: annee });
-      const titre = document.getElementById("kpi-titre");
-
-      titre.textContent = arrondissement
-        ? `${arrondissement}${arrondissement===1?"er":"e"} arr. — ${annee}`
-        : `Paris — ${annee}`;
-
       if (!data?.length) {
-        ["kpi-prix","kpi-variation","kpi-ls","kpi-transactions"]
-          .forEach(id => document.getElementById(id).textContent = "—");
+        ["kpi-prix","kpi-variation","kpi-ls","kpi-transactions"].forEach(id => {
+          document.getElementById(id).textContent = "—";
+        });
         return;
       }
 
-      const med = v => {
-        const a = v.filter(Boolean).sort((a,b)=>a-b);
-        return a.length ? a[Math.floor(a.length/2)] : null;
-      };
+      const prixMedian = median(data.map(d => d.prix_m2_median).filter(Boolean));
+      const variation  = arrondissement
+        ? data[0]?.prix_m2_variation_pct
+        : median(data.map(d => d.prix_m2_variation_pct).filter(v => v != null));
+      const totalTx = data.reduce((s, d) => s + (d.nb_transactions || 0), 0);
 
-      const prixMed = arrondissement ? data[0]?.prix_m2_median : med(data.map(d=>d.prix_m2_median));
-      const varPct  = arrondissement ? data[0]?.prix_m2_variation_pct : med(data.map(d=>d.prix_m2_variation_pct).filter(v=>v!=null));
-      const totalTx = data.reduce((s,d) => s + (d.nb_transactions||0), 0);
+      const elPrix = document.getElementById("kpi-prix");
+      const elVar  = document.getElementById("kpi-variation");
+      const elTx   = document.getElementById("kpi-transactions");
 
-      const setPrix = document.getElementById("kpi-prix");
-      const setVar  = document.getElementById("kpi-variation");
-      const setTx   = document.getElementById("kpi-transactions");
+      if (prixMedian) {
+        animateValue(elPrix, prixMedian, v => Math.round(v).toLocaleString("fr-FR") + " €");
+      } else { elPrix.textContent = "—"; delete elPrix.dataset.raw; }
 
-      setPrix.textContent = prixMed ? Math.round(prixMed).toLocaleString("fr-FR") + " €" : "—";
-      setTx.textContent   = totalTx ? totalTx.toLocaleString("fr-FR") : "—";
+      if (variation != null) {
+        const sign = variation > 0 ? "+" : "";
+        elVar.textContent = sign + variation.toFixed(1) + "%";
+        elVar.className   = "kpi-value " + (variation > 0 ? "positive" : variation < 0 ? "negative" : "");
+      } else { elVar.textContent = "—"; elVar.className = "kpi-value"; }
 
-      if (varPct != null && !isNaN(varPct)) {
-        setVar.textContent = (varPct > 0 ? "+" : "") + varPct.toFixed(1) + "%";
-        setVar.style.color = varPct > 0 ? "var(--red)" : "var(--green)";
-      } else {
-        setVar.textContent = "—";
-        setVar.style.color = "";
-      }
+      if (totalTx) {
+        animateValue(elTx, totalTx, v => Math.round(v).toLocaleString("fr-FR"));
+      } else { elTx.textContent = "—"; delete elTx.dataset.raw; }
 
       // Logements sociaux
       try {
         const ls = await API.getLogementsSociaux(arrondissement);
-        const lsRows = ls.filter(d => d.annee == annee) || ls;
+        let rows = ls.filter(d => d.annee == annee);
+        if (!rows.length) rows = ls;
         const pct = arrondissement
-          ? lsRows[0]?.part_logements_sociaux_pct
-          : med(lsRows.map(d=>d.part_logements_sociaux_pct).filter(v=>v!=null));
+          ? (rows[0]?.part_logements_sociaux_pct ?? rows[0]?.nb_logements_sociaux)
+          : median(rows.map(d => d.part_logements_sociaux_pct).filter(v => v != null));
         const elLs = document.getElementById("kpi-ls");
-        elLs.textContent = pct != null && !isNaN(pct)
-          ? (pct > 100 ? Math.round(pct).toLocaleString("fr-FR") : pct.toFixed(1) + "%")
-          : "—";
+        if (pct != null && !isNaN(pct)) {
+          elLs.textContent = pct > 100
+            ? Math.round(pct).toLocaleString("fr-FR")
+            : pct.toFixed(1) + "%";
+        } else { elLs.textContent = "—"; }
       } catch { document.getElementById("kpi-ls").textContent = "—"; }
 
-    } catch(e) { console.warn("KPI:", e.message); }
+    } catch (e) { console.warn("KPI update failed:", e.message); }
   }
 
-  // ── Timeline play ──────────────────────────────────────────────────
+  // ── Timeline play ─────────────────────────────────────────────────────────
   let playInterval = null;
-  const btnPlay = document.getElementById("btn-play");
-  const playIcon = document.getElementById("play-icon");
-  const stopIcon = document.getElementById("stop-icon");
+  const btnPlay    = document.getElementById("btn-play");
+  const playIcon   = document.getElementById("play-icon");
+  const playLabel  = document.getElementById("play-label");
+
+  const ICON_PLAY = '<polygon points="5 3 19 12 5 21 5 3"/>';
+  const ICON_STOP = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
 
   btnPlay.addEventListener("click", () => {
     if (playInterval) {
       clearInterval(playInterval);
       playInterval = null;
       btnPlay.classList.remove("playing");
-      playIcon.style.display = "";
-      stopIcon.style.display = "none";
+      playIcon.innerHTML = ICON_PLAY;
+      playLabel.textContent = "Lecture timeline";
       return;
     }
     btnPlay.classList.add("playing");
-    playIcon.style.display = "none";
-    stopIcon.style.display = "";
-
-    let cur = parseInt(slider.min);
+    playIcon.innerHTML = ICON_STOP;
+    playLabel.textContent = "Arrêter";
+    let cur = parseInt(sliderAnnee.min);
     playInterval = setInterval(() => {
-      slider.value = cur;
-      slider.dispatchEvent(new Event("input"));
+      sliderAnnee.value = cur;
+      sliderAnnee.dispatchEvent(new Event("input"));
       cur++;
-      if (cur > parseInt(slider.max)) {
+      if (cur > parseInt(sliderAnnee.max)) {
         clearInterval(playInterval);
         playInterval = null;
         btnPlay.classList.remove("playing");
-        playIcon.style.display = "";
-        stopIcon.style.display = "none";
+        playIcon.innerHTML = ICON_PLAY;
+        playLabel.textContent = "Lecture timeline";
       }
-    }, 1400);
+    }, 1200);
   });
 
-  // ── Comparaison ────────────────────────────────────────────────────
-  document.getElementById("btn-compare")?.addEventListener("click", async () => {
-    const arr1  = parseInt(document.getElementById("compare-arr1").value);
-    const arr2  = parseInt(document.getElementById("compare-arr2").value);
-    const annee = parseInt(slider.value);
-    await Charts.buildComparaison(arr1, arr2, annee);
-  });
+  // ── Comparaison ───────────────────────────────────────────────────────────
+  document.getElementById("btn-compare").addEventListener("click", async () => {
+    const arr1     = parseInt(document.getElementById("compare-arr1").value);
+    const arr2     = parseInt(document.getElementById("compare-arr2").value);
+    const errorEl  = document.getElementById("compare-error");
 
-  // ── Panneau détail (clic carte) ────────────────────────────────────
-  window.openDetailPanel = async (arr, annee) => {
-    const panel = document.getElementById("detail-panel");
-    const num   = document.getElementById("detail-num");
-    const name  = document.getElementById("detail-name");
-    const body  = document.getElementById("detail-body");
-
-    num.textContent  = arr;
-    name.textContent = `${arr}${arr===1?"er":"e"} Arrondissement · ${annee}`;
-    body.innerHTML   = `<div class="loading-pulse">Chargement…</div>`;
-    panel.classList.add("open");
-
-    try {
-      const [prixArr, indicArr, lsArr] = await Promise.all([
-        API.getPrix({ arrondissement: arr, anneeMin: annee, anneeMax: annee }),
-        API.getIndicateurs(arr),
-        API.getLogementsSociaux(arr),
-      ]);
-      const p  = prixArr?.[0] || {};
-      const ind = indicArr?.[0] || {};
-      const ls = lsArr?.find(d => d.annee == annee) || lsArr?.[0] || {};
-
-      const SCORES = [
-        ["Accessibilité",   ind.score_accessibilite],
-        ["Qualité de vie",  ind.score_qualite_vie],
-        ["Sécurité",        ind.score_securite],
-        ["Accès. immo.",    ind.score_accessibilite_immo],
-      ];
-
-      body.innerHTML = `
-        <div class="detail-metric">
-          <span class="detail-metric-label">Prix/m² médian</span>
-          <span class="detail-metric-val">${p.prix_m2_median ? Math.round(p.prix_m2_median).toLocaleString("fr-FR") + " €" : "—"}</span>
-        </div>
-        <div class="detail-metric">
-          <span class="detail-metric-label">Variation annuelle</span>
-          <span class="detail-metric-val ${(p.prix_m2_variation_pct||0) > 0 ? 'bad' : 'good'}">
-            ${p.prix_m2_variation_pct != null ? (p.prix_m2_variation_pct > 0 ? "+" : "") + p.prix_m2_variation_pct.toFixed(1) + "%" : "—"}
-          </span>
-        </div>
-        <div class="detail-metric">
-          <span class="detail-metric-label">Transactions</span>
-          <span class="detail-metric-val">${p.nb_transactions ? Math.round(p.nb_transactions).toLocaleString("fr-FR") : "—"}</span>
-        </div>
-        <div class="detail-metric">
-          <span class="detail-metric-label">Logements sociaux</span>
-          <span class="detail-metric-val">${ls.part_logements_sociaux_pct != null ? ls.part_logements_sociaux_pct.toFixed(1) + "%" : "—"}</span>
-        </div>
-        <div style="margin-top:4px">
-          ${SCORES.map(([lbl, val]) => val != null ? `
-            <div class="score-bar-wrap">
-              <div class="score-bar-label"><span>${lbl}</span><span>${val.toFixed(1)}/10</span></div>
-              <div class="score-bar"><div class="score-bar-fill" style="width:${val*10}%"></div></div>
-            </div>
-          ` : "").join("")}
-        </div>
-        ${ind.score_global != null ? `
-          <div class="detail-metric" style="margin-top:4px">
-            <span class="detail-metric-label">Score global</span>
-            <span class="detail-metric-val ${ind.score_global >= 6 ? 'good' : ind.score_global <= 4 ? 'bad' : ''}">${ind.score_global.toFixed(1)} /10</span>
-          </div>
-        ` : ""}
-      `;
-    } catch(e) {
-      body.innerHTML = `<div style="color:var(--red);font-size:12px">Erreur : ${e.message}</div>`;
+    if (arr1 === arr2) {
+      errorEl.style.display = "block";
+      return;
     }
+    errorEl.style.display = "none";
+    chartsLoaded.comparaison = true;
+    await Charts.buildComparaison(arr1, arr2, parseInt(sliderAnnee.value));
+  });
+
+  // ── Utilitaires ───────────────────────────────────────────────────────────
+  function median(arr) {
+    if (!arr.length) return null;
+    const s = [...arr].sort((a, b) => a - b);
+    const m = Math.floor(s.length / 2);
+    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  await updateKPIs(2023);
+
+  // ── Air Quality streaming ─────────────────────────────────────────────────
+  const AQ_POLL_MS   = 30_000;   // poll toutes les 30s
+  let   aqMarkers    = [];       // marqueurs MapLibre actifs
+  let   aqPollTimer  = null;
+
+  const aqBadge      = document.getElementById("aq-badge");
+  const aqStatus     = document.getElementById("aq-status");
+  const aqAlertsList = document.getElementById("aq-alerts-list");
+  const aqUpdated    = document.getElementById("aq-updated");
+  const aqSource     = document.getElementById("aq-source");
+
+  const ARR_CENTERS = {
+    1:[2.3475,48.8603], 2:[2.3494,48.8678], 3:[2.3604,48.8637], 4:[2.3538,48.8534],
+    5:[2.3499,48.8463], 6:[2.3336,48.8491], 7:[2.3137,48.8566], 8:[2.3097,48.8742],
+    9:[2.3384,48.8769], 10:[2.3606,48.8773], 11:[2.3790,48.8594], 12:[2.3999,48.8409],
+    13:[2.3652,48.8282], 14:[2.3266,48.8286], 15:[2.2959,48.8422], 16:[2.2685,48.8638],
+    17:[2.3127,48.8847], 18:[2.3470,48.8919], 19:[2.3873,48.8830], 20:[2.3980,48.8647],
   };
 
-  document.getElementById("detail-close")?.addEventListener("click", () => {
-    document.getElementById("detail-panel")?.classList.remove("open");
-  });
+  function _aqArrLabel(arr) {
+    return `${arr}${arr === 1 ? "er" : "e"}`;
+  }
 
-  // ── Init ───────────────────────────────────────────────────────────
-  await updateKPIs(2023);
+  function clearAqMarkers() {
+    aqMarkers.forEach(m => m.remove());
+    aqMarkers = [];
+  }
+
+  function renderAqMarkers(alerts) {
+    clearAqMarkers();
+    if (!window.MapModule || !MapModule.getMap) return;
+    const map = MapModule.getMap ? MapModule.getMap() : null;
+    if (!map) return;
+
+    alerts.forEach(alert => {
+      const center = ARR_CENTERS[alert.arrondissement];
+      if (!center) return;
+
+      const el = document.createElement("div");
+      el.className = `aq-map-marker ${alert.alert_level}`;
+      el.title = `${_aqArrLabel(alert.arrondissement)} arr. — IQA ${Math.round(alert.iqa)} (${alert.alert_level})`;
+
+      try {
+        const { maplibregl } = window;
+        if (maplibregl) {
+          const marker = new maplibregl.Marker({ element: el })
+            .setLngLat(center)
+            .addTo(map);
+          aqMarkers.push(marker);
+        }
+      } catch (_) {}
+    });
+  }
+
+  function renderAqWidget(data) {
+    const n = data.alerts_active || 0;
+
+    // Badge dans le titre de la section
+    if (n === 0) {
+      aqBadge.style.display = "none";
+      aqStatus.className    = "aq-status-ok";
+      aqStatus.textContent  = "Qualité de l'air : bonne";
+    } else {
+      const worstLevel = data.alerts.some(a => a.alert_level === "rouge") ? "rouge" : "orange";
+      aqBadge.className   = `aq-badge ${worstLevel}`;
+      aqBadge.textContent = `${n} alerte${n > 1 ? "s" : ""}`;
+      aqBadge.style.display = "inline-flex";
+      aqStatus.className  = "aq-status-alert";
+      aqStatus.textContent = worstLevel === "rouge"
+        ? `${n} arrondissement${n > 1 ? "s" : ""} en alerte rouge`
+        : `${n} arrondissement${n > 1 ? "s" : ""} en alerte orange`;
+    }
+
+    // Liste des alertes
+    aqAlertsList.innerHTML = "";
+    if (data.alerts && data.alerts.length) {
+      const wrap = document.createElement("div");
+      wrap.className = "aq-alerts-list";
+      data.alerts.forEach(a => {
+        const row = document.createElement("div");
+        row.className = `aq-alert-row ${a.alert_level}`;
+        row.innerHTML = `
+          <span class="aq-dot ${a.alert_level}"></span>
+          <span class="aq-arr-name">${_aqArrLabel(a.arrondissement)} arr.</span>
+          <span class="aq-iqa ${a.alert_level}">IQA ${Math.round(a.iqa)}</span>
+        `;
+        wrap.appendChild(row);
+      });
+      aqAlertsList.appendChild(wrap);
+    }
+
+    // Horodatage
+    if (data.updated_at) {
+      const d = new Date(data.updated_at);
+      aqUpdated.textContent = `Mise à jour : ${d.toLocaleTimeString("fr-FR")}`;
+    }
+
+    // Source des données
+    if (aqSource) {
+      if (data.source === "airparif_live") {
+        aqSource.textContent  = "⬤ Airparif WFS (données réelles)";
+        aqSource.className    = "aq-source live";
+      } else if (data.source === "bronze_fallback") {
+        aqSource.textContent  = "⬤ Simulation Bronze (fallback)";
+        aqSource.className    = "aq-source fallback";
+      } else {
+        aqSource.textContent  = "";
+        aqSource.className    = "aq-source";
+      }
+    }
+
+    // Marqueurs carte
+    renderAqMarkers(data.alerts || []);
+  }
+
+  async function pollAirQuality() {
+    try {
+      const data = await API.getAirQuality({ hours: 24 });
+      renderAqWidget(data);
+    } catch (err) {
+      aqStatus.className   = "aq-status-error";
+      aqStatus.textContent = err.name === "AbortError"
+        ? "Données indisponibles (délai dépassé)"
+        : "Données indisponibles";
+      aqBadge.style.display = "none";
+    }
+  }
+
+  // Premier appel immédiat, puis polling
+  await pollAirQuality();
+  aqPollTimer = setInterval(pollAirQuality, AQ_POLL_MS);
 
 })();

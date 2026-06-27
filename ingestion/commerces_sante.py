@@ -5,6 +5,8 @@ et établissements de santé (hôpitaux, médecins) pour Paris.
 Source : Base SIRENE via API INSEE + FINESS (santé)
 Compétence validée : C2.3
 """
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path

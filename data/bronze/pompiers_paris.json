@@ -1,0 +1,819 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-05-22T09:19:02Z",
+    "timestamp_areas_base": "2026-05-22T01:20:51Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 367130230,
+      "lat": 35.2929386,
+      "lon": -93.7279736,
+      "tags": {
+        "addr:state": "AR",
+        "amenity": "fire_station",
+        "ele": "124",
+        "gnis:feature_id": "2116932",
+        "name": "Paris Fire Department",
+        "source": "USGS Geonames"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5582692945,
+      "lat": 39.6103995,
+      "lon": -87.6977938,
+      "tags": {
+        "amenity": "fire_station",
+        "name": "Paris Fire Department"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13231828827,
+      "lat": 48.8506355,
+      "lon": 2.2731541,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "2-4",
+        "addr:postcode": "75016",
+        "addr:street": "Rue François Millet",
+        "amenity": "fire_station",
+        "name": "Brigade de Sapeurs-Pompiers de Paris - Caserne Auteuil",
+        "website": "https://pompiersparis.fr"
+      }
+    },
+    {
+      "type": "way",
+      "id": 30152614,
+      "center": {
+        "lat": 48.8226057,
+        "lon": 2.3745365
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "37 Boulevard Masséna 75013 Paris",
+        "addr:housenumber": "37",
+        "addr:postcode": "75013",
+        "addr:street": "Boulevard Masséna",
+        "amenity": "fire_station",
+        "check_date": "2025-05-14",
+        "emergency:phone": "01 45 83 80 80",
+        "name": "Centre de secours Masséna",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 45 83 82 66",
+        "ref": "MASS",
+        "ref:FR:BSPP:CIE": "2",
+        "ref:FR:BSPP:EM_GRPT": "1",
+        "ref:FR:BSPP:GRPT": "2",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q18914805"
+      }
+    },
+    {
+      "type": "way",
+      "id": 43020660,
+      "center": {
+        "lat": 48.8465377,
+        "lon": 2.3511741
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "48-50 rue Cardinal Lemoine 75005 Paris",
+        "addr:housenumber": "48-50",
+        "addr:postcode": "75005",
+        "addr:street": "Rue du Cardinal Lemoine",
+        "amenity": "fire_station",
+        "building": "yes",
+        "building:levels": "7",
+        "emergency:phone": "+33 1 43 54 41 64",
+        "name": "Centre de secours Poissy",
+        "official_name": "POISSY",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "operator:wikipedia": "fr:Brigade de sapeurs-pompiers de Paris",
+        "phone": "+33 1 43 54 26 15",
+        "ref": "POIS",
+        "ref:FR:BSPP:CIE": "2",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "2",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre;mise à jour : 2009",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445249"
+      }
+    },
+    {
+      "type": "way",
+      "id": 54038494,
+      "center": {
+        "lat": 48.8641645,
+        "lon": 2.3446826
+      },
+      "tags": {
+        "amenity": "fire_station",
+        "architect": "E. Perronne",
+        "building": "yes",
+        "check_date": "2024-12-15",
+        "contact:city": "Paris",
+        "contact:full": "21 Rue du Jour 75001 Paris",
+        "contact:housenumber": "21",
+        "contact:phone": "+33 1 42 36 55 49",
+        "contact:postcode": "75001",
+        "contact:street": "Rue du Jour",
+        "emergency:phone": "01 42 36 60 03",
+        "name": "Centre de secours Rousseau",
+        "official_name": "ROUSSEAU",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "operator:wikipedia": "fr:Brigade de sapeurs-pompiers de Paris",
+        "ref": "ROUS",
+        "ref:FR:BSPP:CIE": "8",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "2",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "source:BSPP": "data.gouv.fr",
+        "start_date": "1897",
+        "wikidata": "Q28445246"
+      }
+    },
+    {
+      "type": "way",
+      "id": 54106142,
+      "center": {
+        "lat": 48.8656383,
+        "lon": 2.3355496
+      },
+      "tags": {
+        "amenity": "fire_station",
+        "building": "yes",
+        "check_date": "2024-04-02",
+        "emergency:phone": "+33 1 42 61 03 93",
+        "name": "Centre de secours Saint-Honoré",
+        "official_name": "SAINT HONORE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "operator:wikipedia": "fr:Brigade de sapeurs-pompiers de Paris",
+        "phone": "+33 1 42 61 03 26",
+        "ref": "STHO",
+        "ref:FR:BSPP:CIE": "7",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445247"
+      }
+    },
+    {
+      "type": "way",
+      "id": 56045019,
+      "center": {
+        "lat": 48.8557916,
+        "lon": 2.3618145
+      },
+      "tags": {
+        "amenity": "fire_station",
+        "contact:city": "Paris",
+        "contact:full": "7 rue de Sévigné 75004 Paris",
+        "contact:housenumber": "7",
+        "contact:phone": "+33 1 44 61 50 28",
+        "contact:postcode": "75004",
+        "contact:street": "Rue de Sévigné",
+        "emergency:phone": "01 42 72 17 84",
+        "name": "Centre de secours Sévigné",
+        "official_name": "SEVIGNE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "operator:wikipedia": "fr:Brigade de sapeurs-pompiers de Paris",
+        "ref": "SEVI",
+        "ref:FR:BSPP:CIE": "11",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "2",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445248"
+      }
+    },
+    {
+      "type": "way",
+      "id": 63201336,
+      "center": {
+        "lat": 48.8808938,
+        "lon": 2.3680492
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "188 quai de Valmy 75010 Paris",
+        "addr:housenumber": "188",
+        "addr:postcode": "75010",
+        "addr:street": "Quai de Valmy",
+        "amenity": "fire_station",
+        "building": "yes",
+        "building:levels": "2",
+        "check_date": "2024-10-05",
+        "emergency:phone": "01 40 35 74 58",
+        "name": "Centre de secours Landon",
+        "official_name": "LANDON",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 40 35 58 31",
+        "ref": "LAND",
+        "ref:FR:BSPP:CIE": "10",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445256"
+      }
+    },
+    {
+      "type": "way",
+      "id": 63203552,
+      "center": {
+        "lat": 48.8712435,
+        "lon": 2.3585129
+      },
+      "tags": {
+        "amenity": "fire_station",
+        "building": "yes",
+        "building:levels": "4",
+        "check_date": "2024-06-28",
+        "contact:city": "Paris",
+        "contact:full": "50 rue du Château d'Eau 75010 Paris",
+        "contact:housenumber": "50",
+        "contact:phone": "+33 1 40 03 98 28",
+        "contact:postcode": "75010",
+        "contact:street": "Rue du Château d'Eau",
+        "emergency:phone": "+33 1 40 40 03 33",
+        "name": "Château d'Eau",
+        "official_name": "Château d'Eau",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "ref": "CHTO",
+        "ref:FR:BSPP:CIE": "8",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre;mise à jour : 2010",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445258"
+      }
+    },
+    {
+      "type": "way",
+      "id": 63354220,
+      "center": {
+        "lat": 48.8511246,
+        "lon": 2.3315183
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "11 rue du Vieux Colombier75006 Paris",
+        "addr:housenumber": "11",
+        "addr:postcode": "75006",
+        "addr:street": "Rue du Vieux Colombier",
+        "amenity": "fire_station",
+        "check_date": "2025-05-05",
+        "emergency:phone": "+33 1 45 48 32 90",
+        "name": "Centre de Secours Colombier",
+        "official_name": "COLOMBIER",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 45 48 50 70",
+        "ref": "COBI",
+        "ref:FR:BSPP:CIE": "4",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "3",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445253"
+      }
+    },
+    {
+      "type": "way",
+      "id": 75749858,
+      "center": {
+        "lat": 48.8839789,
+        "lon": 2.3196296
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "27 rue Boursault 75017 Paris",
+        "addr:housenumber": "27",
+        "addr:postcode": "75017",
+        "addr:street": "Rue Boursault",
+        "amenity": "fire_station",
+        "building": "yes",
+        "building:levels": "4",
+        "emergency:phone": "01 45 22 36 77",
+        "name": "Centre de secours Boursault",
+        "official_name": "BOURSAULT",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 45 22 43 13",
+        "ref": "BSLT",
+        "ref:FR:BSPP:CIE": "9",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "ref:FR:RNB": "C8YVP3JGDNVV",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "wikidata": "Q28445269"
+      }
+    },
+    {
+      "type": "way",
+      "id": 84198285,
+      "center": {
+        "lat": 48.8506939,
+        "lon": 2.2732195
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "2-4 rue François Millet 75016 Paris",
+        "addr:housenumber": "2-4",
+        "addr:postcode": "75016",
+        "addr:street": "Rue François Millet",
+        "amenity": "fire_station",
+        "emergency:phone": "01 42 88 51 81",
+        "name": "Centre de secours Auteuil",
+        "official_name": "AUTEUIL",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 42 88 76 20",
+        "ref": "AUTE",
+        "ref:FR:BSPP:CIE": "6",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "3",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445268"
+      }
+    },
+    {
+      "type": "way",
+      "id": 151542382,
+      "center": {
+        "lat": 48.8911262,
+        "lon": 2.3327854
+      },
+      "tags": {
+        "addr:full": "12 rue Carpeaux 75018 Paris",
+        "addr:housenumber": "12",
+        "addr:street": "Rue Carpeaux",
+        "alt_name": "Caserne Carpeaux",
+        "amenity": "fire_station",
+        "emergency:phone": "01 46 27 35 55",
+        "name": "Centre de secours Montmartre",
+        "official_name": "MONTMARTRE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 42 26 83 28",
+        "ref": "MTMA",
+        "ref:FR:BSPP:CIE": "9",
+        "ref:FR:BSPP:EM_GRPT": "1",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445273"
+      }
+    },
+    {
+      "type": "way",
+      "id": 187794747,
+      "center": {
+        "lat": 48.8373819,
+        "lon": 2.3437869
+      },
+      "tags": {
+        "amenity": "fire_station",
+        "contact:city": "Paris",
+        "contact:full": "55 boulevard de Port-Royal 75013 Paris",
+        "contact:housenumber": "55",
+        "contact:phone": "+33 1 53 55 23 28",
+        "contact:postcode": "75013",
+        "contact:street": "Boulevard de Port-Royal",
+        "emergency:phone": "01 45 35 18 18",
+        "name": "Centre de secours de Port-Royal",
+        "official_name": "PORT ROYAL",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "ref": "PROY",
+        "ref:FR:BSPP:CIE": "3",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "3",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445263"
+      }
+    },
+    {
+      "type": "way",
+      "id": 233604300,
+      "center": {
+        "lat": 48.8571952,
+        "lon": 2.3391936
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:housenumber": "11",
+        "addr:postcode": "75006",
+        "addr:street": "Quai de Conti",
+        "alt_name": "Commandant Beinier",
+        "amenity": "fire_station",
+        "building": "boat",
+        "emergency": "water_rescue",
+        "name": "Centre de Secours La Monnaie",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "operator:wikipedia": "fr:Brigade de sapeurs-pompiers de Paris",
+        "seamark:rescue_station:category": "lifeboat",
+        "seamark:type": "rescue_station",
+        "wikidata": "Q2945495",
+        "wikipedia": "fr:Centre de secours La Monnaie"
+      }
+    },
+    {
+      "type": "way",
+      "id": 435996677,
+      "center": {
+        "lat": 48.836373,
+        "lon": 2.3864193
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "5 place Lachambaudie 75012 Paris",
+        "addr:housenumber": "5",
+        "addr:postcode": "75012",
+        "addr:street": "Place Lachambeaudie",
+        "amenity": "fire_station",
+        "emergency:phone": "01 43 43 53 75",
+        "name": "Centre de secours Nativité",
+        "official_name": "NATIVITE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "operator:wikipedia": "fr:Brigade de sapeurs-pompiers de Paris",
+        "phone": "+33 1 43 43 54 65",
+        "ref": "NATI",
+        "ref:FR:BSPP:CIE": "1",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "2",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445261"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437567178,
+      "center": {
+        "lat": 48.8312238,
+        "lon": 2.318017
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "45 avenue Villemain 75014 Paris",
+        "addr:housenumber": "45",
+        "addr:postcode": "75014",
+        "addr:street": "Avenue Villemain",
+        "amenity": "fire_station",
+        "check_date": "2024-03-20",
+        "emergency:phone": "+33 1 45 43 00 51",
+        "name": "Centre de secours Plaisance",
+        "official_name": "PLAISANCE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 45 43 51 77",
+        "ref": "PLAI",
+        "ref:FR:BSPP:CIE": "3",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "3",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445265"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437571497,
+      "center": {
+        "lat": 48.8615482,
+        "lon": 2.305743
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "7 rue Malar75007 Paris",
+        "addr:housenumber": "7",
+        "addr:postcode": "75007",
+        "addr:street": "Rue Malar",
+        "amenity": "fire_station",
+        "emergency:phone": "01 47 05 41 99",
+        "name": "Centre de secours Malar",
+        "official_name": "MALAR",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 45 55 08 81",
+        "ref": "MALA",
+        "ref:FR:BSPP:CIE": "4",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "3",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445254"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437575413,
+      "center": {
+        "lat": 48.8441267,
+        "lon": 2.2903639
+      },
+      "tags": {
+        "amenity": "fire_station",
+        "contact:city": "Paris",
+        "contact:full": "6 Place Violet 75015 Paris",
+        "contact:housenumber": "6",
+        "contact:phone": "+33 1 56 77 34 28",
+        "contact:postcode": "75015",
+        "contact:street": "Place Violet",
+        "emergency:phone": "01 45 78 74 52",
+        "name": "Centre de secours Grenelle",
+        "official_name": "GRENELLE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "operator:wikipedia": "fr:Brigade de sapeurs-pompiers de Paris",
+        "ref": "GREN",
+        "ref:FR:BSPP:CIE": "6",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "3",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre;mise à jour : 2009",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445266"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437582727,
+      "center": {
+        "lat": 48.878514,
+        "lon": 2.3319854
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "28 rue Blanche 75009 Paris",
+        "addr:housenumber": "28",
+        "addr:postcode": "75009",
+        "addr:street": "Rue Blanche",
+        "amenity": "fire_station",
+        "check_date": "2024-11-28",
+        "emergency:phone": "01 48 74 56 20",
+        "name": "Centre de Secours Blanche",
+        "official_name": "BLANCHE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 40 23 20 28",
+        "ref": "BLAN",
+        "ref:FR:BSPP:CIE": "7",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445255"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437682347,
+      "center": {
+        "lat": 48.8890641,
+        "lon": 2.3798442
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "2 place de Bitche 75019 Paris",
+        "addr:housenumber": "2",
+        "addr:postcode": "75019",
+        "addr:street": "Place de Bitche",
+        "amenity": "fire_station",
+        "check_date": "2026-05-06",
+        "emergency:phone": "01 40 36 86 03",
+        "name": "Centre de secours Bitche",
+        "official_name": "BITCHE",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 44 65 94 48",
+        "ref": "BITC",
+        "ref:FR:BSPP:CIE": "10",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445274"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437683599,
+      "center": {
+        "lat": 48.8721527,
+        "lon": 2.4037455
+      },
+      "tags": {
+        "addr:full": "47 rue Saint-Fargeau 75020 Paris",
+        "amenity": "fire_station",
+        "contact:city": "Paris",
+        "contact:housenumber": "47",
+        "contact:postcode": "75020",
+        "contact:street": "Rue Saint-Fargeau",
+        "emergency:phone": "01 40 31 72 47",
+        "name": "Centre de secours Ménilmontant",
+        "official_name": "MENILMONTANT",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 40 31 44 18",
+        "ref": "MENI",
+        "ref:FR:BSPP:CIE": "12",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "1",
+        "source": "survey:2014;cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre ; mise à jour : 2019",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445275"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437684040,
+      "center": {
+        "lat": 48.8547404,
+        "lon": 2.4051445
+      },
+      "tags": {
+        "amenity": "fire_station",
+        "contact:city": "Paris",
+        "contact:full": "93 rue des Pyrénées 75020 Paris",
+        "contact:housenumber": "93",
+        "contact:phone": "+33 1 43 71 51 22",
+        "contact:postcode": "75020",
+        "contact:street": "Rue des Pyrénées",
+        "emergency:phone": "01 43 71 53 66",
+        "name": "Centre de secours Charonne",
+        "official_name": "Charonne",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "ref": "CHAR",
+        "ref:FR:BSPP:CIE": "12",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445276"
+      }
+    },
+    {
+      "type": "way",
+      "id": 437874991,
+      "center": {
+        "lat": 48.8659154,
+        "lon": 2.3737529
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:full": "87 avenue Parmentier 75011 Paris",
+        "addr:housenumber": "87",
+        "addr:postcode": "75011",
+        "addr:street": "Avenue Parmentier",
+        "amenity": "fire_station",
+        "check_date": "2024-04-06",
+        "emergency:phone": "01 43 57 58 69",
+        "name": "Centre de secours Parmentier",
+        "official_name": "PARMENTIER",
+        "operator": "BSPP",
+        "operator:en": "Paris Fire Brigade",
+        "operator:fr": "BSPP",
+        "operator:wikidata": "Q583422",
+        "phone": "+33 1 43 57 27 43",
+        "ref": "PARM",
+        "ref:FR:BSPP:CIE": "11",
+        "ref:FR:BSPP:EM_GRPT": "0",
+        "ref:FR:BSPP:GRPT": "1",
+        "ref:FR:BSPP:PC_CIE": "0",
+        "source:BSPP": "data.gouv.fr",
+        "wikidata": "Q28445259"
+      }
+    },
+    {
+      "type": "way",
+      "id": 763501686,
+      "center": {
+        "lat": 33.6420109,
+        "lon": -95.5323803
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "2010",
+        "addr:postcode": "75460",
+        "addr:state": "TX",
+        "addr:street": "24th Street Southeast",
+        "amenity": "fire_station",
+        "building": "yes",
+        "name": "Paris Fire Department Station 4"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1103946639,
+      "center": {
+        "lat": 44.2258408,
+        "lon": -70.5179587
+      },
+      "tags": {
+        "addr:city": "South Paris",
+        "addr:housenumber": "137",
+        "addr:postcode": "04281",
+        "addr:state": "ME",
+        "addr:street": "Western Avenue",
+        "amenity": "fire_station",
+        "building": "yes",
+        "name": "Paris Fire Department"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1203946890,
+      "center": {
+        "lat": 38.2196732,
+        "lon": -84.2386747
+      },
+      "tags": {
+        "amenity": "fire_station"
+      }
+    }
+  ]
+}

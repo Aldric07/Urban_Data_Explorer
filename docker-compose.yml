@@ -1,72 +1,106 @@
-version: "3.9"
-
 services:
-
-  # ── Base relationnelle : PostgreSQL + PostGIS ────────────────────────
+  # ── PostgreSQL + PostGIS (C1.1, C1.3, C1.4) ────────────────────────────────
+  # Base relationnelle : couche Gold (transactions, prix médians, indicateurs,
+  # géométries des arrondissements). Sert l'API pour les requêtes filtrables.
   postgres:
-    image: postgis/postgis:15-3.3
-    container_name: ude_postgres
+    image: postgis/postgis:16-3.4
     environment:
-      POSTGRES_DB:       urban_data_explorer
-      POSTGRES_USER:     ude_user
-      POSTGRES_PASSWORD: ude_password
+      POSTGRES_DB: urban_data
+      POSTGRES_USER: urban
+      POSTGRES_PASSWORD: urban_dev_pwd
     ports:
-      - "5432:5432"
+      # Port hôte 5433 (évite conflit avec un Postgres local sur 5432).
+      # Port interne 5432 inchangé — l'API se connecte via postgres:5432.
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./database/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/init/postgres:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ude_user -d urban_data_explorer"]
+      test: ["CMD-SHELL", "pg_isready -U urban -d urban_data"]
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
 
-  # ── Base NoSQL : MongoDB ─────────────────────────────────────────────
-  mongodb:
-    image: mongo:7.0
-    container_name: ude_mongodb
+  # ── MongoDB (C1.2) ─────────────────────────────────────────────────────────
+  # Base non-relationnelle : couche Bronze brute (payloads JSON hétérogènes
+  # des 13 APIs), data catalog, événements de streaming micro-batch.
+  mongo:
+    image: mongo:7
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ude_user
-      MONGO_INITDB_ROOT_PASSWORD: ude_password
-      MONGO_INITDB_DATABASE:      urban_data_explorer
+      MONGO_INITDB_ROOT_USERNAME: urban
+      MONGO_INITDB_ROOT_PASSWORD: urban_dev_pwd
+      MONGO_INITDB_DATABASE: urban_data
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
-      - ./database/mongo/init.js:/docker-entrypoint-initdb.d/init.js
+      - mongo_data:/data/db
+      - ./db/init/mongo:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+  # ── Adminer (UI web pour PostgreSQL) ───────────────────────────────────────
+  # Accès : http://localhost:8080
+  # Système : PostgreSQL | Serveur : postgres | User : urban | Pwd : urban_dev_pwd
+  # Base : urban_data
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
 
-  # ── API FastAPI ──────────────────────────────────────────────────────
+  # ── mongo-express (UI web pour MongoDB) ────────────────────────────────────
+  # Accès : http://localhost:8081  (login admin / pass : urban-admin / urban_dev_pwd)
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: urban
+      ME_CONFIG_MONGODB_ADMINPASSWORD: urban_dev_pwd
+      ME_CONFIG_MONGODB_URL: mongodb://urban:urban_dev_pwd@mongo:27017/?authSource=admin
+      ME_CONFIG_BASICAUTH_USERNAME: urban-admin
+      ME_CONFIG_BASICAUTH_PASSWORD: urban_dev_pwd
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── API FastAPI (C2.1 + C1.4 scalabilité) ──────────────────────────────────
   api:
     build:
       context: .
       dockerfile: Dockerfile.api
-    container_name: ude_api
     ports:
       - "8000:8000"
     volumes:
-      - ./data:/app/data:ro
+      - ./data:/app/data:ro   # Data Lake en lecture seule (Parquet pour analytique)
     environment:
       - API_KEY=urban-explorer-dev-key
-      - POSTGRES_URL=postgresql://ude_user:ude_password@postgres:5432/urban_data_explorer
-      - MONGODB_URL=mongodb://ude_user:ude_password@mongodb:27017/urban_data_explorer?authSource=admin
+      - POSTGRES_URI=postgresql+psycopg2://urban:urban_dev_pwd@postgres:5432/urban_data
+      - MONGO_URI=mongodb://urban:urban_dev_pwd@mongo:27017/urban_data?authSource=admin
     depends_on:
       postgres:
         condition: service_healthy
-      mongodb:
+      mongo:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
-  # ── Dashboard statique ────────────────────────────────────────────────
+  # ── Dashboard statique servi par nginx ─────────────────────────────────────
   dashboard:
     image: nginx:alpine
-    container_name: ude_dashboard
     ports:
       - "3000:80"
     volumes:
@@ -77,4 +111,4 @@ services:
 
 volumes:
   postgres_data:
-  mongodb_data:
+  mongo_data:

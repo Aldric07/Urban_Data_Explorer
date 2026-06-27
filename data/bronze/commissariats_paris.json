@@ -1,0 +1,1215 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-05-22T09:19:02Z",
+    "timestamp_areas_base": "2026-05-12T07:36:16Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 257713149,
+      "lat": 48.8442218,
+      "lon": 2.3811783,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "80",
+        "addr:postcode": "75012",
+        "addr:street": "Avenue Daumesnil",
+        "alt_name": "Police Nationale;Commissariat 12ème",
+        "amenity": "police",
+        "architect": "Nunez-Yanowsky, Manolo",
+        "check_date": "2025-04-21",
+        "mapillary": "1449606185384295",
+        "name": "Police nationale",
+        "official_name": "Commissariat de police de Paris 12e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "police:FR": "police",
+        "wikidata": "Q61954392"
+      }
+    },
+    {
+      "type": "node",
+      "id": 294282589,
+      "lat": 48.8426264,
+      "lon": 2.3901753,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "30",
+        "addr:postcode": "75012",
+        "addr:street": "Rue Antoine-Julien Hénard",
+        "amenity": "police",
+        "check_date": "2026-04-08",
+        "name": "Police nationale",
+        "opening_hours": "Mo-Th 9:00-12:00,14:00-17:00; Fr 9:00-12:00,14:00-16:00",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "phone": "+33 1 44 87 50 12",
+        "police:FR": "police",
+        "website": "https://www.police-nationale.interieur.gouv.fr/",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 296102679,
+      "lat": 48.8675566,
+      "lon": 2.2753192,
+      "tags": {
+        "amenity": "police",
+        "contact:city": "Paris",
+        "contact:email": "ciat16-opj-permanence@interieur.gouv.fr",
+        "contact:housenumber": "75",
+        "contact:phone": "+33 1 40 72 22 50",
+        "contact:postcode": "75016",
+        "contact:street": "Rue de la Faisanderie",
+        "government": "public_service",
+        "name": "Direction centrale de la Sécurité publique",
+        "office": "government",
+        "opening_hours": "24/7",
+        "short_name": "DCSP"
+      }
+    },
+    {
+      "type": "node",
+      "id": 311114951,
+      "lat": 48.854205,
+      "lon": 2.2688184,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "62",
+        "addr:postcode": "75016",
+        "addr:street": "Avenue Mozart",
+        "alt_name": "Police Nationale;Commissariat 16ème;Commissariat Central 16ème Arrondissement;Commissariat de police du XVI",
+        "amenity": "police",
+        "email": "commissariat-16@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 16e arrondissement",
+        "official_name": "Commissariat de police de Paris 16e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "en:National Police (France)",
+        "police:FR": "police",
+        "wikidata": "Q61954397"
+      }
+    },
+    {
+      "type": "node",
+      "id": 324353055,
+      "lat": 48.8503222,
+      "lon": 2.3325549,
+      "tags": {
+        "amenity": "police",
+        "name": "Police nationale",
+        "official_name": "Commissariat Central du 6e arrondissement",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "wheelchair": "limited"
+      }
+    },
+    {
+      "type": "node",
+      "id": 367131164,
+      "lat": 35.2916081,
+      "lon": -93.7135982,
+      "tags": {
+        "addr:state": "AR",
+        "amenity": "police",
+        "ele": "137",
+        "gnis:feature_id": "2118863",
+        "name": "Paris Police Department",
+        "source": "USGS Geonames"
+      }
+    },
+    {
+      "type": "node",
+      "id": 367131437,
+      "lat": 35.28979,
+      "lon": -93.7127285,
+      "tags": {
+        "addr:state": "AR",
+        "amenity": "police",
+        "ele": "121",
+        "gnis:feature_id": "2118927",
+        "name": "Logan County Sheriff's Office",
+        "source": "USGS Geonames"
+      }
+    },
+    {
+      "type": "node",
+      "id": 525184522,
+      "lat": 48.8843283,
+      "lon": 2.3861616,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "3-5",
+        "addr:postcode": "75019",
+        "addr:street": "Rue Erik Satie",
+        "alt_name": "Police Nationale;Commissariat 19ème;Commissariat Central du 19ème arrondissement",
+        "amenity": "police",
+        "check_date": "2025-04-21",
+        "email": "ecoute19@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 19e arrondissement",
+        "official_name": "Commissariat de police de Paris 19e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "police:FR": "police",
+        "wikidata": "Q61954402"
+      }
+    },
+    {
+      "type": "node",
+      "id": 672709606,
+      "lat": 48.8577179,
+      "lon": 2.2773092,
+      "tags": {
+        "amenity": "police",
+        "name": "Police nationale",
+        "official_name": "Commissariat du Quartier de la Muette",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police"
+      }
+    },
+    {
+      "type": "node",
+      "id": 672714990,
+      "lat": 48.8638302,
+      "lon": 2.2764451,
+      "tags": {
+        "amenity": "police",
+        "name": "Police nationale",
+        "note": "For administrative papers only",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police"
+      }
+    },
+    {
+      "type": "node",
+      "id": 672725690,
+      "lat": 48.884169,
+      "lon": 2.322376,
+      "tags": {
+        "amenity": "police",
+        "name": "Police nationale",
+        "note": "For administrative purpose only",
+        "official_name": "Commissariat de police du 17e arrondissement",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 672727214,
+      "lat": 48.8433511,
+      "lon": 2.276832,
+      "tags": {
+        "amenity": "police",
+        "check_date": "2025-07-19",
+        "contact:city": "Paris",
+        "contact:housenumber": "34",
+        "contact:postcode": "75015",
+        "contact:street": "Rue Balard",
+        "name": "Police nationale",
+        "official_name": "Commissariat de police Javel-Grenelle",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police"
+      }
+    },
+    {
+      "type": "node",
+      "id": 674772628,
+      "lat": 48.875536,
+      "lon": 2.3042932,
+      "tags": {
+        "amenity": "police",
+        "name": "Préfecture de police"
+      }
+    },
+    {
+      "type": "node",
+      "id": 676727512,
+      "lat": 48.8553731,
+      "lon": 2.3435125,
+      "tags": {
+        "alt_name": "Direction Régionale de la Police Judiciaire de Paris",
+        "amenity": "police",
+        "name": "Police judiciaire - Brigade criminelle - Brigade des stupéfiants",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+      }
+    },
+    {
+      "type": "node",
+      "id": 722480906,
+      "lat": 48.8542985,
+      "lon": 2.3783997,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "12-14",
+        "addr:postcode": "75011",
+        "addr:street": "Passage Charles Dallery",
+        "alt_name": "Police Nationale;Commissariat 11ème",
+        "amenity": "police",
+        "check_date": "2026-03-21",
+        "description": "SARIJ et UPQ Dallery",
+        "email": "commissariat-11@interieur.gouv.fr",
+        "name": "Police nationale",
+        "official_name": "Commissariat de police du 11e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "phone": "+33 1 53 36 25 00",
+        "police:FR": "police",
+        "wikidata": "Q61954391"
+      }
+    },
+    {
+      "type": "node",
+      "id": 929558495,
+      "lat": 48.8652119,
+      "lon": 2.2905036,
+      "tags": {
+        "amenity": "police",
+        "name": "Police nationale",
+        "official_name": "Commissariat de Police Chaillot",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1199394987,
+      "lat": 48.8896373,
+      "lon": 2.3480452,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "79",
+        "addr:postcode": "75018",
+        "addr:street": "Rue de Clignancourt",
+        "alt_name": "Commissariat de Police du 18e arrondissement;Commissariat Paris 18e Arrondissement;Commissariat de police de Paris 18e arrondissement",
+        "amenity": "police",
+        "email": "commissariat-18@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 18e arrondissement",
+        "official_name": "Commissariat de police de Paris 18e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "police:FR": "police",
+        "wikidata": "Q61954399"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1299475009,
+      "lat": 48.8670978,
+      "lon": 2.3131224,
+      "tags": {
+        "amenity": "police",
+        "name": "Police nationale",
+        "official_name": "Commissariat de police de Paris 8ème arrondissement",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "police:FR": "police",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1425553504,
+      "lat": 48.8446213,
+      "lon": 2.384584,
+      "tags": {
+        "amenity": "police",
+        "check_date": "2025-01-19",
+        "contact:city": "Paris",
+        "contact:housenumber": "161",
+        "contact:postcode": "75012",
+        "contact:street": "Rue de Charenton",
+        "name": "Préfecture de police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1437440820,
+      "lat": 48.8777407,
+      "lon": 2.3179072,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:country": "FR",
+        "addr:housenumber": "1-3",
+        "addr:postcode": "75008",
+        "addr:street": "Rue de Lisbonne",
+        "alt_name": "Brigade des délégations et des enquêtes de proximité Europe",
+        "amenity": "police",
+        "check_date": "2024-03-25",
+        "name": "Police nationale",
+        "opening_hours": "Mo-Fr 09:00-20:00",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "phone": "+33 1 44 90 82 90",
+        "police:FR": "police",
+        "wheelchair": "official"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2194257164,
+      "lat": 48.8768355,
+      "lon": 2.3527879,
+      "tags": {
+        "amenity": "police",
+        "check_date": "2025-08-22",
+        "contact:city": "Paris",
+        "contact:housenumber": "45",
+        "contact:postcode": "75010",
+        "contact:street": "Rue de Chabrol",
+        "name": "Police nationale",
+        "official_name": "Commissariat Central – BDEP (10eme)",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "phone:FR": "34 30",
+        "police:FR": "police",
+        "website": "https://www.prefecturedepolice.interieur.gouv.fr/poi/commissariat-central-bdep-10eme",
+        "wikidata": "Q61954390"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2368932142,
+      "lat": 48.8550679,
+      "lon": 2.3462868,
+      "tags": {
+        "amenity": "police",
+        "government": "public_service",
+        "name": "Brigade de répression du proxénétisme",
+        "office": "government",
+        "opening_hours": "Mo-Th 08:30-16:30; Fr 08:30-16:00",
+        "short_name": "BRP"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2458125739,
+      "lat": 48.8472846,
+      "lon": 2.2844207,
+      "tags": {
+        "amenity": "police",
+        "contact:city": "Paris",
+        "contact:housenumber": "44",
+        "contact:phone": "+33 1 45 71 14 60",
+        "contact:postcode": "75015",
+        "contact:street": "Rue Linois",
+        "name": "Police nationale",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "police:FR": "police",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2503084479,
+      "lat": 48.8933622,
+      "lon": 2.364812,
+      "tags": {
+        "alt_name": "Sous-Direction Régionale de la Police des Transports - Site Évangile",
+        "amenity": "police",
+        "name": "Police des Transports",
+        "official_name": "Département de l'investigation judiciaire de la Brigade des réseaux ferrés"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3139571972,
+      "lat": 48.857724,
+      "lon": 2.2943986,
+      "tags": {
+        "amenity": "police",
+        "fixme": "Position estimated",
+        "name": "Police nationale",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3623121617,
+      "lat": 48.8401329,
+      "lon": 2.388438,
+      "tags": {
+        "amenity": "police",
+        "contact:city": "Paris",
+        "contact:housenumber": "191",
+        "contact:postcode": "75012",
+        "contact:street": "Rue de Charenton",
+        "name": "Antenne de Police Administrative"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4116658769,
+      "lat": 48.8409353,
+      "lon": 2.31843,
+      "tags": {
+        "amenity": "police",
+        "level": "2",
+        "name": "Police nationale",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4785118720,
+      "lat": 48.8734832,
+      "lon": 2.3397879,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "14",
+        "addr:postcode": "75009",
+        "addr:street": "Rue Chauchat",
+        "alt_name": "Police Nationale;Commissariat 9ème;Commissariat de Police du 9e arrondissement",
+        "amenity": "police",
+        "email": "ecoute09@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 9e arrondissement",
+        "official_name": "Commissariat de police de Paris 9e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "fr:Police nationale (France)",
+        "police:FR": "police",
+        "source": "Service-Public.fr - 10/2016",
+        "wikidata": "Q61954413"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5104417008,
+      "lat": 48.841401,
+      "lon": 2.3622414,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "24-26",
+        "addr:postcode": "75005",
+        "addr:street": "Boulevard de l'Hôpital",
+        "amenity": "police",
+        "name": "Service de protection et de sécurisation",
+        "official_name": "Service de protection et de sécurisation - Direction de l'ordre public et de la circulation",
+        "operator": "Préfecture de Police de Paris",
+        "operator:wikidata": "Q163265",
+        "short_name": "DOPC"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5582692946,
+      "lat": 39.6103181,
+      "lon": -87.6975987,
+      "tags": {
+        "amenity": "police",
+        "name": "Paris Police Department"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5582692948,
+      "lat": 39.612845,
+      "lon": -87.6960978,
+      "tags": {
+        "amenity": "police",
+        "name": "Edgar County 911 Dispatch Center"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5820227988,
+      "lat": 48.8248589,
+      "lon": 2.3662869,
+      "tags": {
+        "amenity": "police",
+        "fixme": "Préciser le type de police avec name=Gendarmerie nationale;Police nationale;Police municipale"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6229436757,
+      "lat": 48.8763832,
+      "lon": 2.3934312,
+      "tags": {
+        "amenity": "police",
+        "contact:city": "Paris",
+        "contact:housenumber": "14",
+        "contact:phone": "+33 1 58 80 80 80",
+        "contact:postcode": "75019",
+        "contact:street": "Rue Augustin Thierry",
+        "contact:website": "https://lannuaire.service-public.fr/ile-de-france/paris/paris_ppp_antenne-75119-01",
+        "name": "Préfecture de police",
+        "official_name": "Préfecture de police – antenne du 19e arrondissement",
+        "opening_hours": "Mo-Fr 9:00-20:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8661670033,
+      "lat": 48.8550437,
+      "lon": 2.3463683,
+      "tags": {
+        "amenity": "police",
+        "government": "public_service",
+        "name": "Brigade de répression du banditisme",
+        "office": "government",
+        "opening_hours": "Mo-Th 08:30-16:30; Fr 08:30-16:00",
+        "short_name": "BRB"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11030092194,
+      "lat": 48.8555127,
+      "lon": 2.3299953,
+      "tags": {
+        "amenity": "police",
+        "name": "Police nationale",
+        "opening_hours": "Mo-Fr 09:00-19:00 \"on appointment\"",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "phone": "+33 1 45 49 67 70"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11523373869,
+      "lat": 48.8619762,
+      "lon": 2.4097577,
+      "tags": {
+        "addr:housenumber": "154",
+        "addr:street": "Boulevard Davout",
+        "amenity": "police",
+        "name": "Office central de lutte contre les crimes contre l'humanité et les crimes de haine (OCLCH)",
+        "website": "https://www.gendarmerie.interieur.gouv.fr/notre-institution/notre-organisation/l-office-central-de-lutte-contre-les-crimes-contre-l-humanite-et-les-crimes-de-haine-oclch"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11931290025,
+      "lat": 48.8348758,
+      "lon": 2.3872359,
+      "tags": {
+        "amenity": "police",
+        "check_date:opening_hours": "2025-07-06",
+        "government": "public_service",
+        "name": "Direction de la sécurité de proximité de l’agglomération parisienne",
+        "office": "government",
+        "opening_hours:signed": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12281784020,
+      "lat": 48.8677974,
+      "lon": 2.3183014,
+      "tags": {
+        "amenity": "police",
+        "operator": "Gendarmerie nationale",
+        "operator:wikidata": "Q1422336"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12994949786,
+      "lat": 48.8348447,
+      "lon": 2.3871755,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:postcode": "75012",
+        "addr:street": "Rue de l'Aubrac",
+        "alt_name": "ULII 75",
+        "amenity": "police",
+        "name": "Unité de Lutte contre l'Immigration Irrégulière (ULII 75)",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12994975033,
+      "lat": 48.8426012,
+      "lon": 2.3901119,
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "30",
+        "addr:postcode": "75012",
+        "addr:street": "Rue Antoine-Julien Hénard",
+        "alt_name": "ULII 75 BI",
+        "amenity": "police",
+        "level": "1",
+        "name": "Unité de Lutte contre l'Immigration Irréguilière, Brigades d'Investigation (ULII 75 BI)",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13859745901,
+      "lat": 48.8731489,
+      "lon": 2.3428904,
+      "tags": {
+        "amenity": "police",
+        "check_date": "2026-05-22"
+      }
+    },
+    {
+      "type": "way",
+      "id": 53657334,
+      "center": {
+        "lat": 48.8541008,
+        "lon": 2.3508946
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "18",
+        "addr:postcode": "75004",
+        "addr:street": "Rue Chanoinesse",
+        "amenity": "police",
+        "building": "yes",
+        "building:levels": "5",
+        "name": "Compagnies motocyclistes de la préfecture de police de Paris",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "en:National Police (France)",
+        "short_name": "Police nationale",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+      }
+    },
+    {
+      "type": "way",
+      "id": 56702025,
+      "center": {
+        "lat": 48.8650127,
+        "lon": 2.3613093
+      },
+      "tags": {
+        "amenity": "police",
+        "building": "service",
+        "name": "Commissariat de Paris Centre",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+      }
+    },
+    {
+      "type": "way",
+      "id": 63195428,
+      "center": {
+        "lat": 48.8808624,
+        "lon": 2.3661835
+      },
+      "tags": {
+        "alt_name": "Centre de Police 10e;Commissariat de Police du 10e arrondissement;Commissariat Paris 10e Arrondissement;Commissariat Central de Police 10ème arrondissement Paris;Commissariat de police de Paris 10e arrondissement",
+        "amenity": "police",
+        "building": "yes",
+        "check_date": "2025-04-04",
+        "contact:city": "Paris",
+        "contact:housenumber": "26",
+        "contact:postcode": "75010",
+        "contact:street": "Rue Louis Blanc",
+        "email": "ecoute10@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 10e arrondissement",
+        "official_name": "Commissariat de police de Paris 10e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "phone": "+33 1 53 19 43 55",
+        "police:FR": "police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "website": "https://www.prefecturedepolice.interieur.gouv.fr/poi/commissariat-central-10eme",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "way",
+      "id": 69049419,
+      "center": {
+        "lat": 48.8620107,
+        "lon": 2.3121034
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "9",
+        "addr:postcode": "75007",
+        "addr:street": "Rue Fabert",
+        "alt_name": "Police Nationale;Commissariat 7ème;Commissariat central de Police 7ème",
+        "amenity": "police",
+        "building": "civic",
+        "email": "commissariat-07@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 7e arrondissement",
+        "official_name": "Commissariat de police de Paris 7e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "wikidata": "Q61954411"
+      }
+    },
+    {
+      "type": "way",
+      "id": 69257600,
+      "center": {
+        "lat": 48.8811721,
+        "lon": 2.3279298
+      },
+      "tags": {
+        "amenity": "police",
+        "building": "yes",
+        "building:levels": "5",
+        "name": "Police - SAIP",
+        "opening_hours": "Mo-Su,PH 00:00-00:00",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+      }
+    },
+    {
+      "type": "way",
+      "id": 69971400,
+      "center": {
+        "lat": 48.8401192,
+        "lon": 2.302449
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "250",
+        "addr:postcode": "75015",
+        "addr:street": "Rue de Vaugirard",
+        "alt_name": "Police Nationale;Commissariat 15ème",
+        "amenity": "police",
+        "building": "yes",
+        "email": "commissariat-15@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 15e arrondissement",
+        "official_name": "Commissariat de police de Paris 15e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "phone": "3430",
+        "police:FR": "police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "website": "https://www.prefecturedepolice.interieur.gouv.fr/poi/commissariat-central-15eme",
+        "wikidata": "Q61954395"
+      }
+    },
+    {
+      "type": "way",
+      "id": 69999172,
+      "center": {
+        "lat": 48.8654752,
+        "lon": 2.3969034
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "3-7",
+        "addr:postcode": "75020",
+        "addr:street": "Rue des Gâtines",
+        "alt_name": "Police Nationale;Commissariat 20ème;Commissariat de Police du 20ème arrondissement;Commissariat Central du XXème Arrondissement",
+        "amenity": "police",
+        "building": "yes",
+        "email": "ciat20-bdep@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 20e arrondissement",
+        "name:ru": "Центральный комиссариат XX округа",
+        "official_name": "Commissariat de police de Paris 20e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "wheelchair": "yes",
+        "wikidata": "Q61954405"
+      }
+    },
+    {
+      "type": "way",
+      "id": 75747905,
+      "center": {
+        "lat": 48.8850537,
+        "lon": 2.3221096
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "19-21",
+        "addr:postcode": "75017",
+        "addr:street": "Rue Truffaut",
+        "alt_name": "Police Nationale;Commissariat 17ème;Commissariat de Police de Paris 17ème;Centre de Police du XVII",
+        "amenity": "police",
+        "architect": "Hellin;Sebbag",
+        "building": "yes",
+        "diff:ref:FR:RNB": "multiple",
+        "email": "commissariat-17@interieur.gouv.fr",
+        "name": "Commissariat de police de Paris 17e arrondissement",
+        "official_name": "Commissariat de police de Paris 17e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "phone": "3430",
+        "police:FR": "police",
+        "ref:FR:RNB": "T9AV7V9BF631;9Q6548ZGQAEJ",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "start_date": "2011",
+        "wheelchair": "yes",
+        "wikidata": "Q61954398"
+      }
+    },
+    {
+      "type": "way",
+      "id": 78006574,
+      "center": {
+        "lat": 48.8853605,
+        "lon": 2.3519095
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "34",
+        "addr:postcode": "75018",
+        "addr:street": "Rue de la Goutte d'Or",
+        "alt_name": "SAIP 18e arrondissement, SAIP 18ème, Poste plaintes 18e;Centre De Police De La Goutte D'or",
+        "amenity": "police",
+        "building": "yes",
+        "check_date": "2025-04-21",
+        "email": "commissariat-16@interieur.gouv.fr",
+        "name": "Commissariat de police - Poste de plaintes de Paris 18e arrondissement",
+        "official_name": "Commissariat de police - Poste de plaintes de Paris 18e arrondissement",
+        "opening_hours": "Mo-Sa 09:00-20:00",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police",
+        "source": "extraction vectorielle v1 cadastre-dgi-fr source : Direction Générale des Impôts - Cadas. Mise à jour : 2010"
+      }
+    },
+    {
+      "type": "way",
+      "id": 78534165,
+      "center": {
+        "lat": 48.8330311,
+        "lon": 2.3559118
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "144",
+        "addr:postcode": "75013",
+        "addr:street": "Boulevard de l'Hôpital",
+        "alt_name": "Police Nationale;Commissariat 13ème",
+        "amenity": "police",
+        "building": "yes",
+        "building:levels": "6",
+        "email": "commissariat-13@interieur.gouv.fr",
+        "name": "Police nationale",
+        "official_name": "Commissariat de police de Paris 13e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "en:National Police (France)",
+        "police:FR": "police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "wikidata": "Q61954393"
+      }
+    },
+    {
+      "type": "way",
+      "id": 79084291,
+      "center": {
+        "lat": 48.8264091,
+        "lon": 2.3707059
+      },
+      "tags": {
+        "amenity": "police",
+        "building": "yes",
+        "contact:city": "Paris",
+        "contact:housenumber": "71",
+        "contact:postcode": "75013",
+        "contact:street": "Rue Albert",
+        "name": "Préfecture de police",
+        "opening_hours": "24/7",
+        "operator": "Préfecture de police de Paris",
+        "operator:wikidata": "Q163265",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 79686964,
+      "center": {
+        "lat": 48.8361561,
+        "lon": 2.3231047
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "114-116",
+        "addr:postcode": "75014",
+        "addr:street": "Avenue du Maine",
+        "alt_name": "Police Nationale;Commissariat 14ème",
+        "amenity": "police",
+        "building": "yes",
+        "building:levels": "9",
+        "name": "Police nationale",
+        "name:fr": "Commissariat du 14eme arrondissement",
+        "official_name": "Commissariat de police de Paris 14e arrondissement",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police",
+        "roof:shape": "flat",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+        "wikidata": "Q61954394"
+      }
+    },
+    {
+      "type": "way",
+      "id": 184552908,
+      "center": {
+        "lat": 48.8494094,
+        "lon": 2.3482762
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "4",
+        "addr:postcode": "75005",
+        "addr:street": "Rue de la Montagne Sainte-Geneviève",
+        "alt_name": "Police Nationale;Commissariat 5ème;Commissariat 6ème;Commissariat central de police 5ᶱ et 6ᶱ arrondissements",
+        "amenity": "police",
+        "building": "yes",
+        "building:levels": "4",
+        "name": "Commissariat de police de Paris 5e et 6e arrondissements",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "en:National Police (France)",
+        "police:FR": "police",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012",
+        "website": "https://www.prefecturedepolice.interieur.gouv.fr"
+      }
+    },
+    {
+      "type": "way",
+      "id": 246325591,
+      "center": {
+        "lat": 48.888061,
+        "lon": 2.3765878
+      },
+      "tags": {
+        "amenity": "police",
+        "building": "government",
+        "name": "Service d'Investigation Transversale",
+        "short_name": "SIT",
+        "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+      }
+    },
+    {
+      "type": "way",
+      "id": 320545660,
+      "center": {
+        "lat": 48.8764101,
+        "lon": 2.3254712
+      },
+      "tags": {
+        "amenity": "police",
+        "indoor": "room",
+        "level": "1",
+        "name": "Police nationale",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "police:FR": "police"
+      }
+    },
+    {
+      "type": "way",
+      "id": 407777273,
+      "center": {
+        "lat": 48.8767282,
+        "lon": 2.3605791
+      },
+      "tags": {
+        "amenity": "police",
+        "contact:city": "Paris",
+        "contact:postcode": "75010",
+        "contact:street": "Place du 11 Novembre 1918",
+        "indoor": "room",
+        "level": "0",
+        "name": "Police nationale",
+        "official_name": "Unité d'Accueil et de Sécurisation Gare de l'Est",
+        "opening_hours": "Mo-Su 06:30-22:30",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "phone:FR": "34 30",
+        "police:FR": "police",
+        "website": "https://www.prefecturedepolice.interieur.gouv.fr/poi/unite-daccueil-et-de-securisation-gare-de-lest"
+      }
+    },
+    {
+      "type": "way",
+      "id": 565940018,
+      "center": {
+        "lat": 33.6488315,
+        "lon": -95.5245503
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "2910",
+        "addr:postcode": "75460",
+        "addr:state": "TX",
+        "addr:street": "Clarksville Street",
+        "amenity": "police",
+        "building": "yes",
+        "name": "Paris Police Department"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1050626959,
+      "center": {
+        "lat": 48.8645403,
+        "lon": 2.3442063
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:floor": "1",
+        "addr:housenumber": "61",
+        "addr:postcode": "75001",
+        "addr:street": "Rue Jean-Jacques Rousseau",
+        "amenity": "police",
+        "building": "yes",
+        "check_date": "2025-06-12",
+        "description": "Service d'Investigation",
+        "internet_access": "no",
+        "level": "0",
+        "name": "Sûreté Territoriale de Paris",
+        "opening_hours": "24/7",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "operator:wikipedia": "en:National Police (France)",
+        "payment:cards": "no",
+        "payment:cash": "yes",
+        "payment:credit_cards": "no",
+        "payment:debit_cards": "no",
+        "phone": "+33 1 53 71 53 71",
+        "polling_station": "no",
+        "source": "local knowledge",
+        "start_date": "2021-07-23",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1063083454,
+      "center": {
+        "lat": 39.6129853,
+        "lon": -87.6960031
+      },
+      "tags": {
+        "amenity": "police",
+        "building": "yes",
+        "name": "Edgar County Sheriff's Department",
+        "source": "microsoft/BuildingFootprints"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1097844922,
+      "center": {
+        "lat": 44.2239776,
+        "lon": -70.5146061
+      },
+      "tags": {
+        "addr:city": "South Paris",
+        "addr:housenumber": "35",
+        "addr:postcode": "04281",
+        "addr:state": "ME",
+        "addr:street": "Market Square",
+        "amenity": "police",
+        "building": "yes",
+        "name": "Paris Police Department"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1163055703,
+      "center": {
+        "lat": 42.2276007,
+        "lon": -111.4004099
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "50",
+        "addr:postcode": "83261",
+        "addr:state": "ID",
+        "addr:street": "North Main Street",
+        "amenity": "police",
+        "building": "yes",
+        "emergency": "psap",
+        "name": "Bear Lake County Sheriff"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1227811911,
+      "center": {
+        "lat": 48.8803535,
+        "lon": 2.3569996
+      },
+      "tags": {
+        "amenity": "police",
+        "contact:city": "Paris",
+        "contact:housenumber": "17",
+        "contact:postcode": "75010",
+        "contact:street": "Rue de Dunkerque",
+        "indoor": "room",
+        "level": "0",
+        "name": "Police nationale",
+        "official_name": "Unité d'Accueil et de Sécurisation Gare du Nord",
+        "opening_hours": "Mo-Su 06:30-22:30",
+        "operator": "Police nationale",
+        "operator:wikidata": "Q121484",
+        "phone:FR": "34 30",
+        "police:FR": "police",
+        "website": "https://www.prefecturedepolice.interieur.gouv.fr/poi/unite-daccueil-et-de-securisation-gare-du-nord"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1350988081,
+      "center": {
+        "lat": 44.2215104,
+        "lon": -70.5190476
+      },
+      "tags": {
+        "addr:city": "Paris",
+        "addr:housenumber": "26",
+        "addr:postcode": "04281",
+        "addr:state": "ME",
+        "addr:street": "Western Avenue",
+        "amenity": "police",
+        "building": "yes",
+        "name": "Oxford County Sheriff"
+      }
+    }
+  ]
+}

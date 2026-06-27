@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *.pyo
 .Python
@@ -46,4 +47,10 @@ htmlcov/
 .coverage
 
 # Docker
-*.dockerignore
+.dockerignore
+
+# DuckDB (fichiers analytiques générés)
+*.db
+*.duckdb
+
+rapport_streaming_batch.docx

@@ -4,6 +4,8 @@ Télécharge les données de qualité de l'air depuis AIRPARIF / data.gouv.
 Source : data.gouv.fr (données AIRPARIF open data)
 Compétence validée : C2.3
 """
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path

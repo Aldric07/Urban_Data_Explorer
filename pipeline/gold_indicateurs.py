@@ -9,6 +9,8 @@ I4 Tension immobilière    : prix/m² vs revenus médians + loyers de référenc
 
 Compétences validées : C2.3, C2.4
 """
+from __future__ import annotations
+
 import sys
 from pathlib import Path
 
@@ -154,12 +156,17 @@ def compute_qualite_vie(df_parcs, df_air, df_bruit, df_circ) -> pd.DataFrame:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # I3 — SÉCURITÉ
-# Source : faits constatés police nationale
+# Sources : criminalité (SSMSI) + commissariats (OSM) + casernes pompiers (OSM)
+#
+# Formule :
+#   score_securite = score_criminalite × 60%
+#                  + score_commissariats × 25%
+#                  + score_pompiers      × 15%
 # ─────────────────────────────────────────────────────────────────────────────
-def compute_securite(df_crime) -> pd.DataFrame:
+def compute_securite(df_crime, df_securite_urbaine) -> pd.DataFrame:
     base = pd.DataFrame({"arrondissement": ARRONDISSEMENTS})
 
-    # Données réelles si arrondissement disponible et non nul
+    # ── Sous-indicateur 1 : Criminalité (60%) ──────────────────────────────
     if df_crime is not None and "arrondissement" in df_crime.columns:
         df_valid = df_crime[df_crime["arrondissement"].notna()].copy()
         if not df_valid.empty:
@@ -171,7 +178,6 @@ def compute_securite(df_crime) -> pd.DataFrame:
             )
             base = base.merge(c, on="arrondissement", how="left")
 
-    # Fallback si pas de données par arrondissement
     if "nb_faits" not in base.columns or base["nb_faits"].isna().all():
         faits_connus = {
             1:3200, 2:2100, 3:1800, 4:2400, 5:1500, 6:1600, 7:1200,
@@ -181,10 +187,61 @@ def compute_securite(df_crime) -> pd.DataFrame:
         base["nb_faits"] = base["arrondissement"].map(faits_connus)
 
     base["nb_faits"] = base["nb_faits"].fillna(base["nb_faits"].median())
-    base["score_securite"] = normalize_0_10(
-        base["nb_faits"].astype(float), inverse=True
-    )
-    return base[["arrondissement","score_securite","nb_faits"]]
+    base["s_criminalite"] = normalize_0_10(base["nb_faits"].astype(float), inverse=True)
+
+    # ── Sous-indicateur 2 : Commissariats de police (25%) ──────────────────
+    if df_securite_urbaine is not None and "arrondissement" in df_securite_urbaine.columns:
+        df_police = df_securite_urbaine[
+            df_securite_urbaine["type"] == "commissariats"
+        ].copy()
+        df_police = df_police[df_police["arrondissement"].notna()]
+        if not df_police.empty:
+            df_police["arrondissement"] = df_police["arrondissement"].astype(int)
+            p = df_police.groupby("arrondissement").size().reset_index(name="nb_commissariats")
+            base = base.merge(p, on="arrondissement", how="left")
+
+    if "nb_commissariats" not in base.columns or base["nb_commissariats"].isna().all():
+        nb_comm_connus = {
+            1:1, 2:1, 3:1, 4:1,  5:1,  6:1,  7:1,  8:1,  9:1,  10:2,
+            11:2, 12:2, 13:2, 14:1, 15:2, 16:2, 17:2, 18:2, 19:2, 20:2
+        }
+        base["nb_commissariats"] = base["arrondissement"].map(nb_comm_connus)
+
+    base["nb_commissariats"] = base["nb_commissariats"].fillna(1)
+    base["s_commissariats"] = normalize_0_10(base["nb_commissariats"].astype(float))
+
+    # ── Sous-indicateur 3 : Casernes de pompiers (15%) ─────────────────────
+    if df_securite_urbaine is not None and "arrondissement" in df_securite_urbaine.columns:
+        df_pompiers = df_securite_urbaine[
+            df_securite_urbaine["type"] == "pompiers"
+        ].copy()
+        df_pompiers = df_pompiers[df_pompiers["arrondissement"].notna()]
+        if not df_pompiers.empty:
+            df_pompiers["arrondissement"] = df_pompiers["arrondissement"].astype(int)
+            pp = df_pompiers.groupby("arrondissement").size().reset_index(name="nb_casernes")
+            base = base.merge(pp, on="arrondissement", how="left")
+
+    if "nb_casernes" not in base.columns or base["nb_casernes"].isna().all():
+        nb_casernes_connus = {
+            1:0, 2:1, 3:1, 4:1, 5:1, 6:0, 7:1, 8:1, 9:0, 10:1,
+            11:2, 12:2, 13:2, 14:1, 15:3, 16:2, 17:2, 18:2, 19:1, 20:1
+        }
+        base["nb_casernes"] = base["arrondissement"].map(nb_casernes_connus)
+
+    base["nb_casernes"] = base["nb_casernes"].fillna(0)
+    base["s_pompiers"] = normalize_0_10(base["nb_casernes"].astype(float))
+
+    # ── Score final pondéré ─────────────────────────────────────────────────
+    base["score_securite"] = (
+        base["s_criminalite"]  * 0.60 +
+        base["s_commissariats"] * 0.25 +
+        base["s_pompiers"]      * 0.15
+    ).round(2)
+
+    return base[[
+        "arrondissement", "score_securite",
+        "nb_faits", "nb_commissariats", "nb_casernes"
+    ]]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -194,19 +251,14 @@ def compute_securite(df_crime) -> pd.DataFrame:
 def compute_tension_immo(df_gold_prix, df_revenus, df_loyers) -> pd.DataFrame:
     base = pd.DataFrame({"arrondissement": ARRONDISSEMENTS})
 
-    # Revenus réels INSEE si disponibles, sinon estimés
+    # Revenus réels INSEE Filosofi 2021 (MED_SL — niveau de vie médian €/an)
     if df_revenus is not None and "revenu_median" in df_revenus.columns:
         base = base.merge(
             df_revenus[["arrondissement","revenu_median"]],
             on="arrondissement", how="left"
         )
     if "revenu_median" not in base.columns or base["revenu_median"].isna().all():
-        revenus_estimes = {
-            1:38000, 2:36000, 3:32000, 4:37000, 5:33000, 6:42000, 7:48000,
-            8:52000, 9:35000, 10:27000, 11:28000, 12:30000, 13:27000, 14:31000,
-            15:33000, 16:55000, 17:38000, 18:25000, 19:24000, 20:25000
-        }
-        base["revenu_median"] = base["arrondissement"].map(revenus_estimes)
+        raise ValueError("Données revenus INSEE Filosofi manquantes — vérifier data/bronze/revenus_insee_paris.csv")
 
     # Prix réels DVF
     if df_gold_prix is not None and "prix_m2_median" in df_gold_prix.columns:
@@ -258,23 +310,24 @@ def compute_tension_immo(df_gold_prix, df_revenus, df_loyers) -> pd.DataFrame:
 def run():
     logger.info("Gold — 4 indicateurs custom complets")
 
-    df_tr      = load("transports.parquet")
-    df_edu     = load("education.parquet")
-    df_cs      = load("commerces_sante.parquet")
-    df_parcs   = load("parcs.parquet")
-    df_air     = load("qualite_air.parquet")
-    df_bruit   = load("bruit.parquet")
-    df_circ    = load("circulation.parquet")
-    df_crime   = load("criminalite.parquet")
-    df_revenus = load("revenus.parquet")
-    df_loyers  = load("loyers.parquet")
+    df_tr              = load("transports.parquet")
+    df_edu             = load("education.parquet")
+    df_cs              = load("commerces_sante.parquet")
+    df_parcs           = load("parcs.parquet")
+    df_air             = load("qualite_air.parquet")
+    df_bruit           = load("bruit.parquet")
+    df_circ            = load("circulation.parquet")
+    df_crime           = load("criminalite.parquet")
+    df_securite_urb    = load("securite_urbaine.parquet")
+    df_revenus         = load("revenus.parquet")
+    df_loyers          = load("loyers.parquet")
 
     gold_path = GOLD_DIR / "agregats_arrondissements.parquet"
     df_gold_prix = pd.read_parquet(gold_path) if gold_path.exists() else None
 
     df_i1 = compute_accessibilite(df_tr, df_edu, df_cs)
     df_i2 = compute_qualite_vie(df_parcs, df_air, df_bruit, df_circ)
-    df_i3 = compute_securite(df_crime)
+    df_i3 = compute_securite(df_crime, df_securite_urb)
     df_i4 = compute_tension_immo(df_gold_prix, df_revenus, df_loyers)
 
     df = df_i1.copy()

@@ -4,6 +4,8 @@ Silver → Gold : Calcule les agrégats par arrondissement et par année.
 Produit le fichier principal utilisé par l'API et le dashboard.
 Compétences validées : C2.3, C2.4, C1.3
 """
+from __future__ import annotations
+
 import sys
 from pathlib import Path
 

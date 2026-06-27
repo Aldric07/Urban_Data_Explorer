@@ -5,6 +5,8 @@ Pour tous les fichiers qui ont lat/lon mais pas d'arrondissement.
 Utilise GeoPandas + le GeoJSON des contours Silver.
 Compétence validée : C1.3 (enrichissement territorial), C2.3
 """
+from __future__ import annotations
+
 import sys
 from pathlib import Path
 
@@ -107,6 +109,7 @@ def run():
     targets = [
         SILVER_DIR / "transports.parquet",
         SILVER_DIR / "parcs.parquet",
+        SILVER_DIR / "securite_urbaine.parquet",
     ]
 
     for path in targets:

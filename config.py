@@ -1,9 +1,13 @@
 """
 config.py — Configuration centralisée Urban Data Explorer
 """
+import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 ROOT = Path(__file__).parent
+load_dotenv(ROOT / ".env")
 
 DATA_DIR   = ROOT / "data"
 BRONZE_DIR = DATA_DIR / "bronze"
@@ -64,7 +68,19 @@ EDUCATION_URL = (
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 
 # ── API ──────────────────────────────────────────────────────────────────────
-API_HOST = "0.0.0.0"
-API_PORT = 8000
-API_KEY  = "urban-explorer-dev-key"
-LOG_LEVEL = "INFO"
+API_HOST = os.getenv("API_HOST", "0.0.0.0")
+API_PORT = int(os.getenv("API_PORT", "8000"))
+API_KEY  = os.getenv("API_KEY", "urban-explorer-dev-key")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+
+# ── Bases de données (BC1) ───────────────────────────────────────────────────
+# Hors Docker : localhost. Dans Docker : surchargé par docker-compose.yml.
+POSTGRES_URI = os.getenv(
+    "POSTGRES_URI",
+    "postgresql+psycopg2://urban:urban_dev_pwd@localhost:5433/urban_data",
+)
+MONGO_URI = os.getenv(
+    "MONGO_URI",
+    "mongodb://urban:urban_dev_pwd@localhost:27017/urban_data?authSource=admin",
+)
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "urban_data")

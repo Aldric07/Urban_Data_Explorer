@@ -4,6 +4,8 @@ Télécharge les données de bruit (BRUITPARIF) pour Paris.
 Source : BRUITPARIF open data / data.gouv.fr
 Compétence validée : C2.3
 """
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path

@@ -4,6 +4,8 @@ Télécharge les données de comptage de trafic routier à Paris.
 Source : Paris Open Data — comptages routiers permanents
 Compétence validée : C2.3
 """
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path
